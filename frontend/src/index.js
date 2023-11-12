@@ -1,29 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import Catalog from './Pages/Catalog';
-import Cart from './Pages/Cart';
-import Profile from './Pages/Profile';
-import Login from './Pages/Login';
-import Register from './Pages/Register';
-import Admin from './Pages/Admin';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import Catalog from "./Pages/Catalog";
+import Cart from "./Pages/Cart";
+import Profile from "./Pages/Profile";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import Admin from "./Pages/Admin";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-          <Routes>
-              <Route path="/" element={<App />} />
-              <Route path="/Katalogas" element={<Catalog />} />
-              <Route path="/Krepšelis" element={<Cart />} />
-              <Route path="/Profilis" element={<Profile/>} />
-              <Route path="/Administracinis" element={<Admin />} />
-              <Route path="/Registruotis" element={<Register />} />
-              <Route path="/Prisijungti" element={<Login />} />
-          </Routes>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/Katalogas" element={<Catalog />} />
+        <Route path="/Krepšelis" element={<Cart />} />
+        <Route path="/Profilis" element={<Profile />} />
+        <Route path="/Administracinis" element={<Admin />} />
+        <Route path="/Registruotis" element={<Register />} />
+        <Route path="/Prisijungti" element={<Login />} />
+      </Routes>
     </Router>
   </React.StrictMode>
 );
