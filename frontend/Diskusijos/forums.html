@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diskusijos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <!--NavBar Section-->
+        <div class="navbar">
+            <nav class="navigation hide" id="navigation">
+                <span class="close-icon" id="close-icon" onclick="showIconBar()"><i class="fa fa-close"></i></span>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="home.html">Pagrindinis</a></li>
+                    <li class="nav-item"><a href="post.html">Sukurti nauja diskusija</a></li>
+                </ul>
+            </nav>
+            <a class="bar-icon" id="iconBar" onclick="hideIconBar()"><i class="fa fa-bars"></i></a>
+            <div class="brand">Diskusijos</div>
+        </div>
+        <div class="filtras"><a class="fa fa-sliders center" href="filtras.html"></a></div>
+        
+        <!--SearchBox Section-->
+        <!--<div class="search-box">
+            <div>
+                <a class="fa fa-sliders center" href="#"> Filtras</a>
+                <select name="" id="">
+                    <option value="Everything">Everything</option>
+                    <option value="Titles">Titles</option>
+                    <option value="Descriptions">Descriptions</option>
+                </select>
+                <input type="text" name="q" placeholder="search ...">
+                <button><i class="fa fa-search"></i></button>
+            </div>
+        </div>-->
+    </header>
+    <div class="container">
+        <div class="subforum">
+            <div class="subforum-title">
+                <h1>Šiandien:</h1>
+            </div>
+            <div class="subforum-row">
+                <div class="subforum-icon subforum-column center">
+                    <i class="fa fa-user center"></i>
+                </div>
+                <div class="subforum-description subforum-column">
+                    <h4><a href="posts.html">Pavadinimas</a></h4>
+                    <p>Santrauka, Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab .</p>
+                </div>
+                <div class="subforum-stats subforum-column center">
+                    <span>Žymės: 12</span>
+                </div>
+                <div class="subforum-info subforum-column">
+                    <b><a href="">post</a></b> by <a href="">JustAUser</a> 
+                    <br>on <small>12 Dec 2020</small>
+                </div>
+            </div>
+        </div>
+        <!--More-->
+        
+        <div class="subforum">
+            <div class="subforum-title">
+                <h1>Šia savaite:</h1>
+            </div>
+            <div class="subforum-row">
+                <div class="subforum-icon subforum-column center">
+                    <i class="fa fa-user center"></i>
+                </div>
+                <div class="subforum-description subforum-column">
+                    <h4><a href="posts.html">Pavadinimas</a></h4>
+                    <p>Santrauka, Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab .</p>
+                </div>
+                <div class="subforum-stats subforum-column center">
+                    <span>Žymės: 12</span>
+                </div>
+                <div class="subforum-info subforum-column">
+                    <b><a href="">post</a></b> by <a href="">JustAUser</a> 
+                    <br>on <small>12 Dec 2020</small>
+                </div>
+            </div>
+            <hr class="subforum-devider">
+            <div class="subforum-row">
+                <div class="subforum-icon subforum-column center">
+                    <i class="fa fa-user center"></i>
+                </div>
+                <div class="subforum-description subforum-column">
+                    <h4><a href="posts.html">Pavadinimas</a></h4>
+                    <p>Santrauka, Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab .</p>
+                </div>
+                <div class="subforum-stats subforum-column center">
+                    <span>Žymės: 12</span>
+                </div>
+                <div class="subforum-info subforum-column">
+                    <b><a href="">post</a></b> by <a href="">JustAUser</a> 
+                    <br>on <small>12 Dec 2020</small>
+                </div>
+            </div>
+            <hr class="subforum-devider">
+            <div class="subforum-row">
+                <div class="subforum-icon subforum-column center">
+                    <i class="fa fa-user center"></i>
+                </div>
+                <div class="subforum-description subforum-column">
+                    <h4><a href="posts.html">Pavadinimas</a></h4>
+                    <p>Santrauka, Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab .</p>
+                </div>
+                <div class="subforum-stats subforum-column center">
+                    <span>Žymės: 12</span>
+                </div>
+                <div class="subforum-info subforum-column">
+                    <b><a href="">post</a></b> by <a href="">JustAUser</a> 
+                    <br>on <small>12 Dec 2020</small>
+                </div>
+            </div>
+            <hr class="subforum-devider">
+            <div class="subforum-row">
+                <div class="subforum-icon subforum-column center">
+                    <i class="fa fa-user center"></i>
+                </div>
+                <div class="subforum-description subforum-column">
+                    <h4><a href="posts.html">Pavadinimas</a></h4>
+                    <p>Santrauka, Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab .</p>
+                </div>
+                <div class="subforum-stats subforum-column center">
+                    <span>Žymės: 12</span>
+                </div>
+                <div class="subforum-info subforum-column">
+                    <b><a href="">post</a></b> by <a href="">JustAUser</a> 
+                    <br>on <small>12 Dec 2020</small>
+                </div>
+            </div>
+            <hr class="subforum-devider">
+            <div class="subforum-row">
+                <div class="subforum-icon subforum-column center">
+                    <i class="fa fa-user center"></i>
+                </div>
+                <div class="subforum-description subforum-column">
+                    <h4><a href="posts.html">Pavadinimas</a></h4>
+                    <p>Santrauka, Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab .</p>
+                </div>
+                <div class="subforum-stats subforum-column center">
+                    <span>Žymės: 12</span>
+                </div>
+                <div class="subforum-info subforum-column">
+                    <b><a href="">post</a></b> by <a href="">JustAUser</a> 
+                    <br>on <small>12 Dec 2020</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="subforum">
+            <div class="subforum-title">
+                <h1>Prieš daugiau nei savaite:</h1>
+            </div>
+            <div class="subforum-row">
+                <div class="subforum-icon subforum-column center">
+                    <i class="fa fa-user center"></i>
+                </div>
+                <div class="subforum-description subforum-column">
+                    <h4><a href="posts.html">Pavadinimas</a></h4>
+                    <p>Santrauka, Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab .</p>
+                </div>
+                <div class="subforum-stats subforum-column center">
+                    <span>Žymės: 12</span>
+                </div>
+                <div class="subforum-info subforum-column">
+                    <b><a href="">post</a></b> by <a href="">JustAUser</a> 
+                    <br>on <small>12 Dec 2020</small>
+                </div>
+            </div>
+            <hr class="subforum-devider">
+            <div class="subforum-row">
+                <div class="subforum-icon subforum-column center">
+                    <i class="fa fa-user center"></i>
+                </div>
+                <div class="subforum-description subforum-column">
+                    <h4><a href="posts.html">Pavadinimas</a></h4>
+                    <p>Santrauka, Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab .</p>
+                </div>
+                <div class="subforum-stats subforum-column center">
+                    <span>Žymės: 12</span>
+                </div>
+                <div class="subforum-info subforum-column">
+                    <b><a href="">post</a></b> by <a href="">JustAUser</a> 
+                    <br>on <small>12 Dec 2020</small>
+                </div>
+            </div>
+            <hr class="subforum-devider">
+            <div class="subforum-row">
+                <div class="subforum-icon subforum-column center">
+                    <i class="fa fa-user center"></i>
+                </div>
+                <div class="subforum-description subforum-column">
+                    <h4><a href="posts.html">Pavadinimas</a></h4>
+                    <p>Santrauka, Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab .</p>
+                </div>
+                <div class="subforum-stats subforum-column center">
+                    <span>Žymės: 12</span>
+                </div>
+                <div class="subforum-info subforum-column">
+                    <b><a href="">post</a></b> by <a href="">JustAUser</a> 
+                    <br>on <small>12 Dec 2020</small>
+                </div>
+            </div>
+            <hr class="subforum-devider">
+            <div class="subforum-row">
+                <div class="subforum-icon subforum-column center">
+                    <i class="fa fa-user center"></i>
+                </div>
+                <div class="subforum-description subforum-column">
+                    <h4><a href="posts.html">Pavadinimas</a></h4>
+                    <p>Santrauka, Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab .</p>
+                </div>
+                <div class="subforum-stats subforum-column center">
+                    <span>Žymės: 12</span>
+                </div>
+                <div class="subforum-info subforum-column">
+                    <b><a href="">post</a></b> by <a href="">JustAUser</a> 
+                    <br>on <small>12 Dec 2020</small>
+                </div>
+            </div>
+
+           
+        </div>
+        <!---->
+    </div>
+
+    <!-- Forum Info -->
+    <div class="forum-info">
+        <div class="chart">
+            MyForum - Stats &nbsp;<i class="fa fa-bar-chart"></i>
+        </div>
+        <span><u>5,369</u> Diskusijos apie <u>48</u> temas.</span><br>
+        <span>Paskutinė kurta diskusija: <b><a href="">Pavadinimas</a></b> on Dec 15 2021 By <a href="">RandomUser</a></span>.<br>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

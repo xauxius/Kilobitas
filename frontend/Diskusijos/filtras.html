@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <!--NavBar Section-->
+        <div class="navbar">
+            <nav class="navigation hide" id="navigation">
+                <span class="close-icon" id="close-icon" onclick="showIconBar()"><i class="fa fa-close"></i></span>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="home.html">Pagrindinis</a></li>
+                    <li class="nav-item"><a href="post.html">Sukurti nauja diskusija</a></li>
+                </ul>
+            </nav>
+            <a class="bar-icon" id="iconBar" onclick="hideIconBar()"><i class="fa fa-bars"></i></a>
+            <div class="brand">Diskusijos</div>
+        </div>
+        <div class="filtras"><a class="fa fa-share center" href="forums.html"></a></div>
+    </header>
+
+    <div class="container">
+        <div class="subforum">
+            <div class="subforum-title2">
+                <h1>Diskusijų filtrai:</h1>
+            </div>
+            <div class="table-head">
+                <div class="status">Rikiuoti pagal: 
+                    <select id="rikiuotiSelect">
+                        <option value="naujausi">Naujausi</option>
+                        <option value="seniausi">Seniausi</option>
+                        <option value="populiarus">Populiarūs</option>
+                        <option value="nepopuliarus">Nepopuliarūs</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-head">
+                <div class="status">Data: 
+                    nuo <input type="date" id="nuoDataInput"> iki <input type="date" id="ikiDataInput">
+                </div>
+            </div>
+            
+            
+            <div class="table-head">
+                <div class="status">Raktiniai žodžiai: <input type="text" id="raktiniaiInput"></div>
+            </div>
+            <div class="table-head">
+                <div class="status">Rimtos: <input type="checkbox" id="rimtumasInput"></div>
+            </div>
+            <div class="table-head">
+                <div class="status">Juokingos: <input type="checkbox" id="juokingosInput"></div>
+            </div>
+            <div class="table-head">
+                <div class="status">Žymės: </div>
+
+                    <div class="checkbox-options">
+                        <label for="artCheckbox"><input type="checkbox" id="artCheckbox" value="art"> Menas</label>
+                        <label for="techCheckbox"><input type="checkbox" id="techCheckbox" value="technology"> Technologijos</label>
+                        <label for="scienceCheckbox"><input type="checkbox" id="scienceCheckbox" value="science"> Mokslas</label>
+                        <label for="moviesCheckbox"><input type="checkbox" id="moviesCheckbox" value="movies"> Filmai</label>
+                        <label for="booksCheckbox"><input type="checkbox" id="booksCheckbox" value="books"> Knygos</label>
+                        <label for="travelCheckbox"><input type="checkbox" id="travelCheckbox" value="travel"> Kelionės</label>
+                        <label for="foodCheckbox"><input type="checkbox" id="foodCheckbox" value="food"> Maistas</label>
+                        <label for="musicCheckbox"><input type="checkbox" id="musicCheckbox" value="music"> Muzika</label>
+                        <label for="gamingCheckbox"><input type="checkbox" id="gamingCheckbox" value="gaming"> Žaidimai</label>
+                        <label for="sportsCheckbox"><input type="checkbox" id="sportsCheckbox" value="sports"> Sportas</label>
+                        <label for="fashionCheckbox"><input type="checkbox" id="fashionCheckbox" value="fashion"> Mada</label>
+                        <label for="healthCheckbox"><input type="checkbox" id="healthCheckbox" value="health"> Sveikata</label>
+                        <label for="codingCheckbox"><input type="checkbox" id="codingCheckbox" value="coding"> Programavimas</label>
+                    </div>
+                </div>
+                <button>Filtruoti</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
