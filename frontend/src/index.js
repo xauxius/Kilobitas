@@ -26,6 +26,10 @@ root.render(
         <Route path="/Prisijungti" element={<Login />} />
         <Route path="/Prekė" element={<Item />} />
       </Routes>
+      {}
+      <Link to="http://127.0.0.1:5500/Kilobitas-main/frontend/Diskusijos/forums.html">
+        <button>Go to Forums</button>
+      </Link>
     </Router>
   </React.StrictMode>
 );
