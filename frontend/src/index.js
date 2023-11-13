@@ -10,6 +10,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Admin from "./Pages/Admin";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Item from "./Pages/Item";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -23,6 +24,7 @@ root.render(
         <Route path="/Administracinis" element={<Admin />} />
         <Route path="/Registruotis" element={<Register />} />
         <Route path="/Prisijungti" element={<Login />} />
+        <Route path="/Prekė" element={<Item />} />
       </Routes>
     </Router>
   </React.StrictMode>

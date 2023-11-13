@@ -1,9 +1,10 @@
 import { Card, CardActionArea, CardMedia, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const ItemMinimalView = (props) => {
     return <Card sx={{ maxWidth: 200 }}>
-        <CardActionArea>
+        <CardActionArea component={Link} to="/Prekė">
             <CardMedia 
                 height={140}
                 component="img"
