@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.center { 
+    font-size: 20px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+} 
+
+</style>
+</head>
+<body>
+
+<div class="topnav">
+    <a href="home.html">Pagrindinis</a>
+    <a href="administracinis.html">Administracinis</a>
+</div>
+
+
+<div class="center">
+    <table border="1">
+        <caption>Naudotoju sarasas</caption>
+        <tr> 
+           <th>Slapyvardis</th>
+           <th>Email</th>
+           <th>Vardas Pavardė</th>
+           <th>Role</th>
+           <th>Nauja role</th>
+         </tr>
+         <tr>
+           <td>vvvppp123</td>
+           <td>nispav@gmail.com</td>
+           <td>Vardas Pavardas</td>
+           <td>naudotojas</td>
+           <td>
+            <select>
+                <option>-----</option>
+                <option>naudotojas</option>
+                <option>administratorius</option>
+                </select>
+            </td>
+           <td><button>Keisti</button></td>
+         </tr>
+         <tr> 
+           <td>vardp11</td>
+           <td>vardenispavard@gmail.com</td>
+           <td>Vardenis Pavardenis</td>
+           <td>administratorius</td>
+           <td>
+            <select>
+                <option>-----</option>
+                <option>naudotojas</option>
+                <option>administratorius</option>
+                </select>
+            </td>
+           <td><button>Keisti</button></td>
+        </tr>
+        <tr> 
+           <td>qwerty</td>
+           <td>qwerty@gmail.com</td>
+           <td>Vardeniss Pavardeniss</td>
+           <td>naudotojas</td>
+           <td>
+            <select>
+                <option>-----</option>
+                <option>naudotojas</option>
+                <option>administratorius</option>
+                </select>
+            </td>
+           <td><button>Keisti</button></td>
+        </tr>
+        <tr> 
+            <td>JonJon</td>
+            <td>jonasJ@gmail.com</td>
+            <td>Jonas Jonaitis</td>
+            <td>naudotojas</td>
+            <td>
+                <select>
+                    <option>-----</option>
+                    <option>naudotojas</option>
+                    <option>administratorius</option>
+                    </select>
+                </td>
+            <td><button>Keisti</button></td>
+         </tr>
+         <tr> 
+            <td>Artis</td>
+            <td>arturasArt@gmail.com</td>
+            <td>Arturas Arturencas</td>
+            <td>administratorius</td>
+            <td>
+                <select>
+                    <option>-----</option>
+                    <option>naudotojas</option>
+                    <option>administratorius</option>
+                    </select>
+                </td>
+            <td><button>Keisti</button></td>
+         </tr>
+       </table>
+    </div>
+
+</body>
+</html>
