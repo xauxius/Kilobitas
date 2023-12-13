@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const ItemMinimalView = (props) => {
+    useEffect(() => {
+        console.log(props.isEdit)
+    }, [])
+
     return <Card sx={{ maxWidth: 200 }}>
-        <CardActionArea component={Link} to="/Prekė">
+        <CardActionArea component={Link} to={props.isEdit ? "/Prekės-redagavimas" : "/Prekė"}>
             <CardMedia 
                 height={140}
                 component="img"
