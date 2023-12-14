@@ -1,0 +1,34 @@
+@server = http://localhost:5216
+
+get {{server}}/items
+
+###
+post {{server}}/items
+Content-Type: application/json
+
+{
+    "Kaina": 10,
+    "Kiekis": 50,
+    "Pavadinimas": "Labai geras",
+    "Aprasymas": "Labai grazus",
+    "Tipas": 0
+}
+
+@id = 09fbc54f-4e25-4480-8252-e0ea730e5b30
+###
+get {{server}}/items/{{id}}
+
+###
+delete {{server}}/items/c4636290-c8ca-419f-8dbd-4fc3e08241eb
+
+###
+PATCH {{server}}/items/{{id}}
+Content-Type: application/json
+
+{
+    "kaina": 11,
+    "kiekis": 50,
+    "Pavadinimas": "Labai",
+    "Aprasymas": "Labai grazus",
+    "Tipas": 1
+}

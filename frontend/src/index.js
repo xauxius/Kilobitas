@@ -26,9 +26,9 @@ root.render(
         <Route path="/Administracinis" element={<Admin />} />
         <Route path="/Registruotis" element={<Register />} />
         <Route path="/Prisijungti" element={<Login />} />
-        <Route path="/Prekė" element={<Item />} />
+        <Route path="/Prekė/:id" element={<Item />} />
         <Route path="/Prekių-administravimas" element={<ItemAdministration />} />
-        <Route path="/Prekės-redagavimas" element={<ItemEdit />} />
+        <Route path="/Prekės-redagavimas/:id" element={<ItemEdit />} />
       </Routes>
     </Router>
   </React.StrictMode>

@@ -8,7 +8,7 @@ const ItemMinimalView = (props) => {
     }, [])
 
     return <Card sx={{ maxWidth: 200 }}>
-        <CardActionArea component={Link} to={props.isEdit ? "/Prekės-redagavimas" : "/Prekė"}>
+        <CardActionArea component={Link} to={props.isEdit ? "/Prekės-redagavimas/"+props.item.id : "/Prekė/"+props.item.id}>
             <CardMedia 
                 height={140}
                 component="img"
