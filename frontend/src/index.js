@@ -9,8 +9,10 @@ import Profile from "./Pages/Profile";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Admin from "./Pages/Admin";
+import ItemAdministration from "./Pages/ItemAdministration";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Item from "./Pages/Item";
+import ItemEdit from "./Pages/ItemEdit";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,7 +26,9 @@ root.render(
         <Route path="/Administracinis" element={<Admin />} />
         <Route path="/Registruotis" element={<Register />} />
         <Route path="/Prisijungti" element={<Login />} />
-        <Route path="/Prekė" element={<Item />} />
+        <Route path="/Prekė/:id" element={<Item />} />
+        <Route path="/Prekių-administravimas" element={<ItemAdministration />} />
+        <Route path="/Prekės-redagavimas/:id" element={<ItemEdit />} />
       </Routes>
     </Router>
   </React.StrictMode>

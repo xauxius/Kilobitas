@@ -41,5 +41,12 @@ namespace API.Controllers
             _itemsService.DeleteItem(id);
             return Ok();
         }
+
+        [HttpPatch("{id}")]
+        public IActionResult UpdateItem(Guid id, Preke item) 
+        {
+            _itemsService.UpdateItem(id, item);
+            return Ok();
+        }
     }
 }

@@ -32,5 +32,17 @@ namespace API.Services
         {
             this._collection.DeleteOne(item => item.Id == id);
         }
+
+        public void UpdateItem(Guid id, Preke item)
+        {
+            var updateDef = Builders<Preke>.Update
+                .Set(i => i.Pavadinimas, item.Pavadinimas)
+                .Set(i => i.Aprasymas, item.Aprasymas)
+                .Set(i => i.Kaina, item.Kaina)
+                .Set(i => i.Kiekis, item.Kiekis)
+                .Set(i => i.Tipas, item.Tipas);
+
+            var itemInDb = this._collection.UpdateOne(item => item.Id == id, updateDef);
+        }
     }
 }
