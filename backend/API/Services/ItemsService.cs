@@ -6,6 +6,7 @@ namespace API.Services
     public class ItemsService
     {
         private IMongoCollection<Preke> _collection;
+        private readonly IMongoCollection<PrekiuKrepselis> _krepselisCollection;
 
         public ItemsService(MongoDatabase database)
         {
