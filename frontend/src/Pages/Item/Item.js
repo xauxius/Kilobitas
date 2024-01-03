@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react"
-import ItemFullView from "../Components/ItemFullView"
-import ItemMinimalView from "../Components/ItemMinimalView"
-import { items, images } from "../Objects/Data"
+import ItemFullView from "../../Components/Item/ItemFullView"
+import ItemMinimalView from "../../Components/Item/ItemMinimalView"
 import { CircularProgress, Stack } from "@mui/material"
 import { useParams } from "react-router-dom"
-import itemsClient from "../Services/itemsService"
-
-const item = items[4]; // Paskui panaikinti!!
-const image = images[4]; // Toza
+import itemsClient from "../../Services/itemsService"
 
 const Item = (props) => {
     const [ item, setItem ] = useState();
@@ -21,7 +17,7 @@ const Item = (props) => {
 
     return <div style={{padding: 20}}>
         {
-            item ? <ItemFullView item={item} image={image} /> : <CircularProgress />
+            item ? <ItemFullView item={item} /> : <CircularProgress />
         }    
         <hr></hr>
         <h2>Žmonės taip pat domėjosi:</h2>
@@ -30,7 +26,6 @@ const Item = (props) => {
                 recommended.map( (element, i) => (
                     <ItemMinimalView
                         item={element}
-                        image={images[i]}
                     />
                 ))
             }

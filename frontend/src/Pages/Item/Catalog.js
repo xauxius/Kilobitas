@@ -1,12 +1,9 @@
-import { Button, CircularProgress, Grid, Stack } from "@mui/material";
-import FilterSideBar from "../Components/FilterSideBar"
-import ItemFull from "../Objects/itemFull";
-import ItemMinimalView from "../Components/ItemMinimalView";
+import { Grid } from "@mui/material";
+import FilterSideBar from "../../Components/Item/FilterSideBar"
 import { useEffect, useState } from "react";
-import {items} from "../Objects/Data";
 import { Link } from "react-router-dom";
-import ItemListView from "../Components/ItemListView";
-import itemsClient from "../Services/itemsService";
+import ItemListView from "../../Components/Item/ItemListView";
+import itemsClient from "../../Services/itemsService";
 
 const Catalog = () => {
     const [items, setItems] = useState();

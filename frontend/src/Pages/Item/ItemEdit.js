@@ -1,10 +1,8 @@
-import { Button, CircularProgress, Grid, Stack } from "@mui/material";
-import ItemEditView from "../Components/ItemEditView";
-import { images } from "../Objects/Data";
+import { Button, CircularProgress, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
-import itemsClient from "../Services/itemsService";
+import itemsClient from "../../Services/itemsService";
 import { useParams } from "react-router-dom";
-import ItemEditing from "../Components/ItemEditing";
+import ItemEditing from "../../Components/Item/ItemEditing";
 
 const ItemEdit = (props) => {
     const [item, setItem] = useState();

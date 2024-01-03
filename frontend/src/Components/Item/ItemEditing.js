@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import ItemEditView from "../Components/ItemEditView";
+import ItemEditView from "./ItemEditView";
 
 const ItemEditing = (props) => {
     const changeImage = (e) => {

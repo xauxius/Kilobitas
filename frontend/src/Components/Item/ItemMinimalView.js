@@ -1,7 +1,7 @@
 import { Card, CardActionArea, CardMedia, Checkbox, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import itemsClient from "../Services/itemsService";
+import itemsClient from "../../Services/itemsService";
 
 const ItemMinimalView = (props) => {
     const [image, setImage] = useState("");

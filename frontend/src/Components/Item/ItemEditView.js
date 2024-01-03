@@ -1,6 +1,6 @@
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, MenuItem, Stack, TextField, Typography } from "@mui/material";
+import { MenuItem, TextField, } from "@mui/material";
 import { useEffect, useState } from "react";
-import itemsClient from "../Services/itemsService";
+import itemsClient from "../../Services/itemsService";
 
 const ItemEditView = (props) => {
     const [types, setTypes] = useState([{value : 0, name: "Kraunasi..." }]);

@@ -1,6 +1,6 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import itemsClient from "../Services/itemsService";
+import itemsClient from "../../Services/itemsService";
 const ItemFullView = (props) => {
   const [image, setImage] = useState("");
 

@@ -1,7 +1,7 @@
-import { Button, CircularProgress, Grid, Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { useState } from "react";
-import itemsClient from "../Services/itemsService";
-import ItemEditing from "../Components/ItemEditing";
+import itemsClient from "../../Services/itemsService";
+import ItemEditing from "../../Components/Item/ItemEditing";
 
 const ItemEdit = () => {
     const [item, setItem] = useState({ pavadinimas: '', aprasymas: '', kiekis: 0, kaina: 0, tipas: 0 });

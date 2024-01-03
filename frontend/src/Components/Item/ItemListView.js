@@ -1,7 +1,5 @@
 import ItemMinimalView from "./ItemMinimalView";
 import { CircularProgress, Grid } from "@mui/material";
-import { useEffect, useState } from "react";
-import itemsClient from "../Services/itemsService";
 
 const ItemListView = (props) => {
     return (

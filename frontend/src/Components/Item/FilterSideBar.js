@@ -1,4 +1,4 @@
-import { Checkbox, FormControl, FormControlLabel, Slider } from '@mui/material';
+import { Checkbox, FormControlLabel, Slider } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
 
