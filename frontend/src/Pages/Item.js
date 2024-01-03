@@ -16,7 +16,7 @@ const Item = (props) => {
 
     useEffect(() => {
         itemsClient.getItem(id).then(res => setItem(res.data));
-        itemsClient.getRecommended(id).then(res => setRecommended(res.data));
+       // itemsClient.getRecommended(id).then(res => setRecommended(res.data));
     }, [id]);
 
     return <div style={{padding: 20}}>

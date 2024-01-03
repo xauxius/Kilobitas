@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pauli\\OneDrive\\Desktop\\Studijos\\ISP\\kilobitas\\backend\\API\\API.csproj": {}
+    "C:\\Users\\Legion\\Desktop\\kilobitas\\Kilobitas\\backend\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pauli\\OneDrive\\Desktop\\Studijos\\ISP\\kilobitas\\backend\\API\\API.csproj": {
+    "C:\\Users\\Legion\\Desktop\\kilobitas\\Kilobitas\\backend\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pauli\\OneDrive\\Desktop\\Studijos\\ISP\\kilobitas\\backend\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Legion\\Desktop\\kilobitas\\Kilobitas\\backend\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\pauli\\OneDrive\\Desktop\\Studijos\\ISP\\kilobitas\\backend\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\pauli\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pauli\\OneDrive\\Desktop\\Studijos\\ISP\\kilobitas\\backend\\API\\obj\\",
+        "projectPath": "C:\\Users\\Legion\\Desktop\\kilobitas\\Kilobitas\\backend\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\Legion\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Legion\\Desktop\\kilobitas\\Kilobitas\\backend\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\pauli\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Legion\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -80,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }
