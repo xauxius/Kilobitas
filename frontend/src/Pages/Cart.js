@@ -1,6 +1,6 @@
 
 const Cart = () => {
-    return <>Cart page</>
+    return <>Cart page test</>
 }
 
 export default Cart;
