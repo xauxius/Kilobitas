@@ -11,10 +11,12 @@ Content-Type: application/json
     "Kiekis": 50,
     "Pavadinimas": "Labai geras",
     "Aprasymas": "Labai grazus",
-    "Tipas": 0
+    "Tipas": ""
 }
 
-@id = 09fbc54f-4e25-4480-8252-e0ea730e5b30
+###
+
+@id = 16298cb0-a1c4-4c67-bcaa-417722bdfb33
 ###
 get {{server}}/items/{{id}}
 
@@ -32,3 +34,12 @@ Content-Type: application/json
     "Aprasymas": "Labai grazus",
     "Tipas": 1
 }
+
+###
+
+GET {{server}}/enums/types
+
+###
+
+GET {{server}}/Images/0c8a9690-69b6-4c2a-b496-4f4a15bd7592
+Accept: */*

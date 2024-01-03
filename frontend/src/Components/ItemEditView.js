@@ -1,8 +1,28 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, MenuItem, Stack, TextField, Typography } from "@mui/material";
-const tipai = ["Procesorius", "Operatyvioji atmintis", "Kietasis diskas"]
+import { useEffect, useState } from "react";
+import itemsClient from "../Services/itemsService";
 
 const ItemEditView = (props) => {
-  return <>
+    const [types, setTypes] = useState([{value : 0, name: "Kraunasi..." }]);
+
+    useEffect(() => {
+        itemsClient.getItemTypes().then(res => setTypes(res.data));
+    }, [])
+
+    const getDefaultValue = () => {
+        let defaultType;
+        if (props.item.tipas) {
+            for (let type of types) {
+                if (type.name == props.item.tipas) {
+                    defaultType = type.value; 
+                }
+            }
+        }
+        defaultType = defaultType ?? 0;
+        return defaultType; 
+    }
+
+    return <>
             <img src="public/Images/proc.jpg" width="300" height="300"></img>
             <TextField
                 required
@@ -22,16 +42,16 @@ const ItemEditView = (props) => {
             <TextField
                 id="tipas"
                 label="Prekės tipas"
-                defaultValue={props.item.tipas}
+                defaultValue={getDefaultValue()}
                 select
                 onChange={props.changeType}
             >
                 {
-                    tipai.map((option) => {
-                        <MenuItem key={option} value={option}>
-                            {option}
+                    types.map((option) =>
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.name}
                         </MenuItem>
-                    })
+                    )
                 }
             </TextField>
             <TextField 
@@ -48,7 +68,7 @@ const ItemEditView = (props) => {
                 type="number"
                 onChange={props.changePrice}
             />
-  </>
+    </>
 };
 
 export default ItemEditView;

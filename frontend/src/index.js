@@ -13,6 +13,7 @@ import ItemAdministration from "./Pages/ItemAdministration";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Item from "./Pages/Item";
 import ItemEdit from "./Pages/ItemEdit";
+import ItemCreation from "./Pages/ItemCreation";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -28,6 +29,7 @@ root.render(
         <Route path="/Prisijungti" element={<Login />} />
         <Route path="/Prekė/:id" element={<Item />} />
         <Route path="/Prekių-administravimas" element={<ItemAdministration />} />
+        <Route path="/Prekės-kūrimas" element={<ItemCreation />} />
         <Route path="/Prekės-redagavimas/:id" element={<ItemEdit />} />
       </Routes>
     </Router>

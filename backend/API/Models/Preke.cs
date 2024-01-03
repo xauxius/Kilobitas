@@ -10,5 +10,6 @@ namespace API.Models
         public string Pavadinimas { get; set; }
         public string Aprasymas { get; set; }
         public PrekesTipas Tipas { get; set; }
+        public string Paveikslelis { get; set; }
     }
 }

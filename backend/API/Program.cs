@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<MongoDatabase>();
 builder.Services.AddSingleton<ItemsService>();
+builder.Services.AddSingleton(new FileService("Images"));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAnyOrigin", builder =>
@@ -17,6 +18,7 @@ builder.Services.AddCors(options =>
         builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
     });
 });
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 

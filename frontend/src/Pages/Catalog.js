@@ -26,7 +26,7 @@ const Catalog = () => {
     </Grid>
     <Grid item xs={9}>
         {
-            items ? <ItemListView items={items} isEdit={false} /> : <CircularProgress />
+            <ItemListView items={items} isEdit={false} />
         }
     </Grid>
     </Grid>

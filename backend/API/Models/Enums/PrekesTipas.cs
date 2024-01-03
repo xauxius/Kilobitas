@@ -2,12 +2,12 @@
 {
     public enum PrekesTipas
     {
-        Vaizdo_Plokste,
+        Vaizdo_Plokštė,
         Procesorius,
         Operatyvioji_Atmintis,
         Kietasis_Diskas,
-        Motinine_Plokste,
-        Ausintuvas,
+        Motininė_Plokštė,
+        Aušintuvas,
         Korpusas
     }
 }

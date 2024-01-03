@@ -42,7 +42,7 @@ namespace API.Services
                 .Set(i => i.Kiekis, item.Kiekis)
                 .Set(i => i.Tipas, item.Tipas);
 
-            var itemInDb = this._collection.UpdateOne(item => item.Id == id, updateDef);
+            _collection.UpdateOne(item => item.Id == id, updateDef);
         }
     }
 }

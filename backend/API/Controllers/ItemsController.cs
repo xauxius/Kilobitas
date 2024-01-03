@@ -1,6 +1,8 @@
 ﻿using API.Models;
 using API.Services;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using API.Models.DTO;
 
 namespace API.Controllers
 {
@@ -9,9 +11,12 @@ namespace API.Controllers
     public class ItemsController : ControllerBase
     {
         private ItemsService _itemsService;
-        public ItemsController(ItemsService itemsService)
+        private readonly IMapper _mapper;
+
+        public ItemsController(ItemsService itemsService, IMapper mapper)
         {
             _itemsService = itemsService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -24,7 +29,8 @@ namespace API.Controllers
         public IActionResult GetItem(Guid id)
         {
             var item = _itemsService.GetItem(id);
-            return Ok(item);
+
+            return Ok(_mapper.Map<PrekeDTO>(item));
         }
 
         [HttpPost]
@@ -32,7 +38,8 @@ namespace API.Controllers
         {
             item.Id = Guid.NewGuid();
             _itemsService.AddItem(item);
-            return Ok(item);
+
+            return Ok(_mapper.Map<PrekeDTO>(item));
         }
 
         [HttpDelete("{id}")]

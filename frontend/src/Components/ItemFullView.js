@@ -1,28 +1,39 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import itemsClient from "../Services/itemsService";
 const ItemFullView = (props) => {
+  const [image, setImage] = useState("");
+
+  useEffect(() => {
+    props.item.paveikslelis && itemsClient.getImage(props.item.paveikslelis).then(res => setImage(res));
+  }, [props.item])
+
   return (
     <Card sx={{ display: 'flex', maxWidth: 1200 }}>
       <CardMedia
         component="img"
         alt="Prekė"
         height={300}
-        image={props.image}
+        image={image}
         sx={{ width: 400, flexShrink: 0 }}
       />
       <Grid container sx={{ flexGrow: 1 }}>
         <Grid item xs={12}>
           <CardContent>
             <Typography variant="h3" component="div">
-              {props.item.name}
+              {props.item.pavadinimas}
             </Typography>
             <Typography variant="body2" component="div">
-              {props.item.description}
+              {props.item.aprasymas}
             </Typography>
             <Typography variant="body2" component="div">
-              {props.item.itemType}
+              {props.item.tipas}
             </Typography>
             <Typography variant="body2" component="div">
-              Liko: {props.item.amount}
+              Kaina: {props.item.kaina} eur.
+            </Typography>
+            <Typography variant="body2" component="div">
+              Liko: {props.item.kiekis}
             </Typography>
           </CardContent>
         </Grid>
