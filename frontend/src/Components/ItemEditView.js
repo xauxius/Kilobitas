@@ -22,7 +22,26 @@ const ItemEditView = (props) => {
         return defaultType; 
     }
 
+    const validateNumberInput = (event, isInt) => {
+        // Allow only digits and control characters
+        const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Backspace', 'ArrowLeft', 'ArrowRight', 'Delete', 'Tab'];
+        
+        !isInt && validKeys.push('.');
+
+        if (!validKeys.includes(event.key) && !event.metaKey && !event.ctrlKey) {
+          event.preventDefault();
+        }
+    };
+
+    const getValidationFunction = (isInt=false) => {
+        const func = (event) => {
+            validateNumberInput(event, isInt);
+        }
+        return func;
+    }
+
     return <>
+            <input type="file" onChange={props.changeImage} />
             <img src="public/Images/proc.jpg" width="300" height="300"></img>
             <TextField
                 required
@@ -60,6 +79,8 @@ const ItemEditView = (props) => {
                 defaultValue={props.item.kiekis}
                 type="number"
                 onChange={props.changeAmount}
+                onKeyDown={getValidationFunction(true)}
+                inputProps={{ min: 0 }}
             />
             <TextField 
                 id="kaina"
@@ -67,6 +88,8 @@ const ItemEditView = (props) => {
                 defaultValue={props.item.kaina}
                 type="number"
                 onChange={props.changePrice}
+                onKeyDown={getValidationFunction()}
+                inputProps={{ min: 0 }}
             />
     </>
 };

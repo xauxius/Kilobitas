@@ -3,8 +3,10 @@ import baseClient from "./baseClient";
 class ItemsClient {
     path = "/items";
 
-    async createItem(item) {
-
+    async createItem(item, image) {
+        const filePath = (await this.postImage(image)).data.filePath;
+        item.paveikslelis = filePath;
+        return await baseClient.post(this.path, item);
     }
 
     async getItems() {
@@ -32,6 +34,17 @@ class ItemsClient {
         const response = await baseClient.get("images/"+imageId, { responseType: "blob" });
         const localUrl = URL.createObjectURL(response.data);
         return localUrl;
+    }
+
+    async postImage(image) {
+        const formData = new FormData();
+        formData.append("image", image);
+
+        return await baseClient.post("images/", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
     }
 
     async getRecommended(itemId) {
