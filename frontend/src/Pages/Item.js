@@ -6,8 +6,8 @@ import { CircularProgress, Stack } from "@mui/material"
 import { useParams } from "react-router-dom"
 import itemsClient from "../Services/itemsService"
 
-const item = items[4];
-const image = images[4];
+const item = items[4]; // Paskui panaikinti!!
+const image = images[4]; // Toza
 
 const Item = (props) => {
     const [ item, setItem ] = useState();
@@ -16,7 +16,7 @@ const Item = (props) => {
 
     useEffect(() => {
         itemsClient.getItem(id).then(res => setItem(res.data));
-        itemsClient.getRecommended(id).then(res => setRecommended(res.data));
+        //itemsClient.getRecommended(id).then(res => setRecommended(res.data));
     }, [id]);
 
     return <div style={{padding: 20}}>

@@ -2,7 +2,9 @@ import { Stack } from "@mui/material";
 import ItemEditView from "../Components/ItemEditView";
 
 const ItemEditing = (props) => {
-    
+    const changeImage = (e) => {
+        props.setImage(e.target.files[0]);
+    }    
 
     const changeName = (e) => {
         props.item.pavadinimas = e.target.value;
@@ -25,14 +27,15 @@ const ItemEditing = (props) => {
     }
 
     const changeType = (e) => {
-        props.item.type = e.target.value;
+        props.item.tipas = e.target.value;
         props.setItem(props.item);
     }
 
     return <Stack spacing={2} style={{padding: 50, width: 600} }> 
         <ItemEditView 
             item={props.item} 
-            image={NaN}
+            image={props.image}
+            changeImage={changeImage}
             changeName={changeName}
             changeAmount={changeAmount}
             changeDescription={changeDescription}
