@@ -40,5 +40,15 @@ namespace API.Controllers
             }
             return Ok(tag);
         }
+        [HttpGet("/GetTagByName")]
+        public ActionResult<Zyme> GetTagByName(string zymesPavadinimas)
+        {
+            var tag = _tagsService.GetTagByName(zymesPavadinimas);
+            if (tag == null)
+            {
+                return NotFound();
+            }
+            return Ok(tag);
+        }
     }
 }

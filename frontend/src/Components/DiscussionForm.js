@@ -38,39 +38,27 @@ const DiscussionForm = ({ onSubmit }) => {
     };
 
     const handleTagInput = async (event) => {
-        const input = event.target.value;
-        const lastChar = input[input.length - 1];
-
-        if (lastChar === '#') {
-            const tagName = input.slice(0, -1).trim();
-            if (tagName) {
-                let existingTag = suggestedTags.find(tag => tag.Žymės_pavadinimas === tagName);
-
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            const input = event.target.value.trim();
+            if (input && input.startsWith('#')) {
+                const tagName = input.slice(1);
+                let existingTag = tags.find(tag => tag.Žymės_pavadinimas.toLowerCase() === tagName.toLowerCase());
                 if (!existingTag) {
                     existingTag = await createTag({ Žymės_pavadinimas: tagName });
-                    setSuggestedTags([...suggestedTags, existingTag]);
+                    setTags([...tags, existingTag]);
                 }
-
-                setTags([...tags, existingTag]);
-                setFormData({ ...formData, TagIds: [...formData.TagIds, existingTag.Id] });
-                event.target.value = ''; // Clear the input field
+                event.target.value = '';
             }
-        } else {
-            const tagSuggestions = await searchTags(input);
-            setSuggestedTags(tagSuggestions);
         }
     };
 
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // Prepare the tags IDs array for submission
         const tagIdsForSubmission = tags.map(tag => tag.Id);
-
-        // Construct the payload with the updated tag IDs
         const payload = {
             ...formData,
-            Sukurimo_data: new Date(),
             TagIds: tagIdsForSubmission
         };
         try {
@@ -143,8 +131,8 @@ const DiscussionForm = ({ onSubmit }) => {
                         <input
                             type="text"
                             id="tagInput"
-                            placeholder="Type and press '#' to add tag"
-                            onChange={handleTagInput}
+                            placeholder="Type and press 'Enter' to add tag"
+                            onKeyDown={handleTagInput} // Changed from onChange to onKeyDown
                             className="input-style21"
                         />
                     </div>

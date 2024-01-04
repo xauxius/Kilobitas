@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backend",
+    "\\backend\\API",
+    "\\backend\\API\\Models",
+    "\\backend\\API\\Models\\Enums",
+    "\\frontend",
+    "\\frontend\\src",
+    "\\frontend\\src\\Components",
+    "\\frontend\\src\\Objects",
+    "\\frontend\\src\\Services"
+  ],
+  "SelectedNode": "\\backend\\API\\Models\\DiskusijaZyme.cs",
+  "PreviewInSolutionExplorer": false
+}

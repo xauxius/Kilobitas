@@ -18,6 +18,7 @@ const DiskusijosPage = () => {
                 }
                 const data = await response.json();
                 setDiscussions(data);
+                console.log(data);
             } catch (error) {
                 console.error("Failed to fetch discussions:", error);
                 setDiscussions([]); // If the fetch fails, set discussions to an empty array or handle accordingly

@@ -42,7 +42,7 @@ namespace API.Controllers
             return CreatedAtAction(nameof(GetDiscussion), new { id = discussion.Id }, discussion);
         }
 
-        [HttpDelete("/DeleteDiscussion{id}")]
+        [HttpDelete("/DeleteDiscussion/{id}")]
         public IActionResult DeleteDiscussion(Guid id)
         {
             var discussion = _discussionsService.GetDiscussion(id);

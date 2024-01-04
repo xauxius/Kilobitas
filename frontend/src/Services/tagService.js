@@ -1,15 +1,15 @@
-const API_URL = 'http://localhost:5000'; // Replace with your API URL
 
-export const searchTags = async (searchTerm) => {
-    const response = await fetch(`${API_URL}/Tags?searchTerm=${searchTerm}`);
+export const searchTags = async (zymesPavadinimas) => {
+    const response = await fetch(`http://localhost:7259/GetTagByName?zymesPavadinimas=${encodeURIComponent(zymesPavadinimas)}`);
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }
     return await response.json();
 };
 
+
 export const createTag = async (tag) => {
-    const response = await fetch(`${API_URL}/Tags`, {
+    const response = await fetch(`http://localhost:7259/PostTag`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -12,6 +12,8 @@ namespace API.Services
     {
         private readonly IMongoCollection<Discussion> _discussionCollection;
         private readonly IMongoCollection<Zyme> _tagCollection;
+        private readonly TagsService _tagsService;
+
 
         public DiscussionsService(MongoDatabase database)
         {
@@ -64,6 +66,15 @@ namespace API.Services
                 .Set(d => d.TagIds, discussionToUpdate.TagIds); // Assuming TagIds is the field where tag references are stored
 
             _discussionCollection.UpdateOne(discussion => discussion.Id == id, updateDef);
+        }
+        public void AddOrUpdateTagsToDiscussion(Guid diskusijaId, List<string> tagLabels)
+        {
+            foreach (var label in tagLabels)
+            {
+                var tag = _tagsService.CreateOrGetTag(label);
+                var diskusijaZyme = new DiskusijaZyme { DiskusijaId = diskusijaId, ZymeId = tag.Id };
+                // Insert DiskusijaZyme into the collection
+            }
         }
     }
 }
