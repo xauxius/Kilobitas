@@ -1,0 +1,17 @@
+.itemContainer {
+    padding: 20px;
+  }
+  
+  .itemContainer hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .recommendedTitle {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .recommendedStack {
+    margin-top: 10px;
+  }
