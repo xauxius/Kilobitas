@@ -27,9 +27,11 @@ namespace API.Services
 		{
 			var mokejimas = new Mokejimas
 			{
-				Vartotojo_id = items?.FirstOrDefault()?.Vartotojo_id ?? Guid.Empty, 
+				Vartotojo_id = items?.FirstOrDefault()?.Vartotojo_id ?? Guid.Empty,
 				Suma = 0,
-				PirktosPrekes = new List<Guid>()
+				PirktosPrekes = new List<Guid>(),
+				busena = false,
+				data = DateTime.Now
 			};
 
 			foreach (var item in items)
@@ -88,6 +90,10 @@ public void AddKrepselis(Krepselis item)
 		public void DeleteKrepselis(Guid id)
 		{
 			_krepselisCollection.DeleteOne(item => item.Id == id);
+		}
+		public void DeleteMokejimas(Guid id)
+		{
+			_mokejimasCollection.DeleteOne(item => item.Id == id);
 		}
 		public void DeleteAllKrepselis(Guid id)
 		{

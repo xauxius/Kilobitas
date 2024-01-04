@@ -13,7 +13,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Item from "./Pages/Item/Item";
 import ItemEdit from "./Pages/Item/ItemEdit";
 import ItemCreation from "./Pages/Item/ItemCreation";
-import PAY from "./Pages/pay";
 import Order from "./Pages/order";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -33,7 +32,6 @@ root.render(
         <Route path="/Prekių-administravimas" element={<ItemAdministration />} />
         <Route path="/Prekės-kūrimas" element={<ItemCreation />} />
         <Route path="/Prekės-redagavimas/:id" element={<ItemEdit />} />
-        <Route path="/pay" element={<PAY />} />
         <Route path="/order" element={<Order />} />
       </Routes>
     </Router>

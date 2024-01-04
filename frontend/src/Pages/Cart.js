@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import cartClient from '../Services/cartService';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
+import emailjs from 'emailjs-com';
+
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -23,12 +25,24 @@ const Cart = () => {
 
 
       const response = await cartClient.getCart(userId);
-
+      
   
       setCartItems(response.data);
     } catch (error) {
       console.error('Error fetching cart:', error);
     }
+  };
+  const sendEmail = async () => {
+    const templateParams = {
+      reply_to: 'dainius.misevicius1@gmail.com', // Replace with the email you want to use as a reply-to address
+    };
+
+    emailjs.send('service_azvzab5', 'template_6nbui8p', templateParams, 'tN3zOSO4cGsmX8opt')
+    .then(function(response) {
+       console.log('SUCCESS!', response.status, response.text);
+    }, function(error) {
+       console.log('FAILED...', error);
+    });
   };
 
   const updateCart = async (id, item) => {
@@ -93,9 +107,10 @@ const Cart = () => {
   
       const insertedMokejimas = await cartClient.insertMokejimas(cartItems);
       await cartClient.deleteAllCart(cartItems[0].vartotojo_id);
+      sendEmail();
       fetchCart();
-     // const form = document.getElementById('checkoutForm');
-      //form.submit()
+      const form = document.getElementById('checkoutForm');
+      form.submit()
     } catch (error) {
       console.error('Error during checkout:', error);
       alert("Įvyko klaida apmokant užsakymą. Bandykite dar kartą.");

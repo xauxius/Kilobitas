@@ -46,6 +46,12 @@ namespace API.Controllers
 			_itemsService.DeleteAllKrepselis(id);
 			return Ok();
 		}
+		[HttpDelete("deleteMokejimas/{id}")]
+		public IActionResult DeleteMokejimas(Guid id)
+		{
+			_itemsService.DeleteMokejimas(id);
+			return Ok();
+		}
 		[HttpPost("insertmokejimas")]
 		public IActionResult InsertMokejimas(List<PrekiuKrepselis> items)
 		{

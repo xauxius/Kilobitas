@@ -12,9 +12,15 @@ const NavigationBar = () => {
                 Katalogas
             </Link>
         </div>
+       
         <div className="nav-button">
             <Link to="/Krepšelis">
                 Krepšelis
+            </Link>
+        </div>
+        <div className="nav-button">
+            <Link to="/order">
+                Užsakymai
             </Link>
         </div>
         <div className="nav-button">

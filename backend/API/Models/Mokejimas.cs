@@ -15,5 +15,7 @@ namespace API.Models
 		public double Suma { get; set; }
 
 		public List<Guid> PirktosPrekes { get; set; }
+		public bool busena { get; set; }
+		public DateTime data { get; set; }
 	}
 }
