@@ -14,6 +14,30 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Item from "./Pages/Item";
 import ItemEdit from "./Pages/ItemEdit";
 import ItemCreation from "./Pages/ItemCreation";
+import DiskusijosPage from "./Pages/DiskusijosPage";
+import DiscussionForm from "./Components/DiscussionForm";
+
+const handleFormSubmit = async (formData) => {
+    try {
+        const response = await fetch('http://localhost:7259/GetDiscussions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data); // Do something with the new discussion data
+        // You might want to redirect the user to the list of discussions or to the newly created discussion
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+};
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -31,6 +55,10 @@ root.render(
         <Route path="/Prekių-administravimas" element={<ItemAdministration />} />
         <Route path="/Prekės-kūrimas" element={<ItemCreation />} />
         <Route path="/Prekės-redagavimas/:id" element={<ItemEdit />} />
+        <Route path="/Diskusijos" element={<DiskusijosPage />} />
+        <Route path="/new-discussion" element={<DiscussionForm onSubmit={handleFormSubmit} />} />
+
+
       </Routes>
     </Router>
   </React.StrictMode>

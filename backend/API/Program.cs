@@ -10,6 +10,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<MongoDatabase>();
 builder.Services.AddSingleton<ItemsService>();
+builder.Services.AddScoped<DiscussionsService>();
+builder.Services.AddScoped<TagsService>();
+
 builder.Services.AddSingleton(new FileService("Images"));
 builder.Services.AddCors(options =>
 {
