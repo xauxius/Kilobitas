@@ -2,9 +2,15 @@ import baseClient from "./baseClient";
 
 class ImageClient {
     async getImage(imageId) {
-        const response = await baseClient.get("images/"+imageId, { responseType: "blob" });
-        const localUrl = URL.createObjectURL(response.data);
-        return localUrl;
+        let image;
+        try {
+            const response = await baseClient.get("images/"+imageId, { responseType: "blob" });
+            image = URL.createObjectURL(response.data);
+            
+        } catch {
+            image = "/Images/blank.jpg";
+        }
+        return image;
     }
 
     async postImage(image) {

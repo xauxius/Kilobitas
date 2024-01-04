@@ -7,8 +7,9 @@ const ItemEdit = () => {
     const [item, setItem] = useState({ pavadinimas: '', aprasymas: '', kiekis: 0, kaina: 0, tipas: 0 });
     const [image, setImage] = useState();
 
-    const create = () => {
-        itemsClient.createItem(item, image);
+    const create = async () => {
+        await itemsClient.createItem(item, image);
+        window.location.assign("/Prekių-administravimas");
     }
 
     return <Stack spacing={2} style={{padding: 50, width: 600} }> 

@@ -83,7 +83,7 @@ namespace API.Services
         {
             var most_av = _also_viewed_collection
                 .Find(av => av.PrekesA_Id == id || av.PrekesB_Id == id)
-                .ToList().OrderBy(av => av.Kartojimai).Take(5);
+                .ToList().OrderByDescending(av => av.Kartojimai).Take(5);
 
             var other_items = most_av.Select(av => findOtherId(av, id) ).ToList();
 

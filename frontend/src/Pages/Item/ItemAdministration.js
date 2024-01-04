@@ -34,13 +34,14 @@ const ItemAdministration = () => {
         });
     }
 
-    const deleteItems = () => {
+    const deleteItems = async () => {
         for (let item of items) {
             if (selected[item.id]) {
                 itemsClient.deleteItem(item.id);
             }
         }
-        itemsClient.getItems().then(res => setItems(res.data));
+        await itemsClient.getItems().then(res => setItems(res.data));
+        window.location.assign("/Prekių-administravimas");
     }
 
     const updateRecommended = () => {

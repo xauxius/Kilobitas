@@ -7,7 +7,6 @@ import itemsClient from "../../Services/itemsService"
 import recommendedClient from "../../Services/recommendedService"
 import sessionService from "../../Services/sessionService"
 
-
 const Item = (props) => {
     const [ item, setItem ] = useState();
     const [ recommended, setRecommended ] = useState([]);
@@ -15,11 +14,17 @@ const Item = (props) => {
 
     useEffect(() => {
         itemsClient.getItem(id).then(res => setItem(res.data));
-        sessionService.getSessionId().then(res => 
+        sessionService.getSessionId().then(res => {
+            console.log(`posted session with id: ${res} of item: ${id}`);
             recommendedClient.postSessionView(res, id)
+        }
         );
         recommendedClient.getRecommended(id).then(res => setRecommended(res.data));
     }, [id]);
+
+    useEffect(() => {
+        console.log(item);
+    }, [item])
 
     return <div style={{padding: 20}}>
         {

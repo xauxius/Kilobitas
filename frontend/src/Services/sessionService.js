@@ -5,8 +5,8 @@ class SessionService {
         let sessionId = sessionStorage.getItem("sessionId");
 
         if (!sessionId || sessionId === "undefined") {
+            console.log("sesija neegzistuoja");
             sessionId = (await recommendedClient.startSession()).data.session_id;
-            console.log(sessionId);
             sessionStorage.setItem("sessionId", sessionId);
         } else {
             console.log(`Sesija jau egzistuoja jos id: ${sessionId}`);

@@ -5,7 +5,12 @@ class ItemsClient {
     path = "/items";
 
     async createItem(item, image) {
-        const filePath = (await imageClient.postImage(image)).data.filePath;
+        let filePath;
+        if (image) {
+            filePath = (await imageClient.postImage(image)).data.filePath;
+        } else {
+            filePath = "default.jpg"
+        }
         item.paveikslelis = filePath;
         return await baseClient.post(this.path, item);
     }
@@ -19,7 +24,12 @@ class ItemsClient {
         return await baseClient.get(this.path+"/"+id);
     }
 
-    async updateItem(id, item) {
+    async updateItem(id, item, image) {
+        if (image) {
+            let filePath = (await imageClient.postImage(image)).data.filePath;
+            item.paveikslelis = filePath;
+        }
+        console.log(item);
         await baseClient.patch(this.path+"/"+id, item);
     }
 

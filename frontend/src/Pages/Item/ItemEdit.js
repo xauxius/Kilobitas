@@ -6,15 +6,26 @@ import ItemEditing from "../../Components/Item/ItemEditing";
 
 const ItemEdit = (props) => {
     const [item, setItem] = useState();
+    const [image, setImage] = useState();
     const { id } = useParams();
 
     useEffect(() => {
         itemsClient.getItem(id).then(res => setItem(res.data));
     }, [id])
 
+    useEffect(() => {
+        item && itemsClient.getItemTypes().then(res => res.data.map(t => {
+            if (t.name == item.tipas) {
+                console.log(item);
+                console.log(item.tipas);
+                item.tipas = t.value;
+            } 
+        }));
+    }, [item])
     
-    const save = () => {
-        itemsClient.updateItem(item.id, item);
+    const save = async () => {
+        await itemsClient.updateItem(item.id, item, image);
+        window.location.assign("/Prekių-administravimas");
     }
 
     return <Stack spacing={2} style={{padding: 50, width: 600} }> 
@@ -22,6 +33,8 @@ const ItemEdit = (props) => {
             item ? <ItemEditing 
                 item={item} 
                 setItem={setItem}
+                image={image}
+                setImage={setImage}
         /> : <CircularProgress />
         } 
         
