@@ -1,32 +1,15 @@
 import React, { useState } from "react";
-import { GoogleLogin } from "react-google-login";
 import "./Styles/Login.css";
-const clientId =
-  "819508509253-5u3c94a6icjq6qfdpg3npbrrf70176l2.apps.googleusercontent.com";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
-    const response = await fetch("/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
-
-    if (response.ok) {
-      console.log("Logged in successfully");
-      // Here you can handle a successful login. For example, you can redirect the user to another page.
-    } else {
-      console.log("Login failed");
-      // Here you can handle a failed login. For example, you can show an error message.
-    }
+  const handleLogin = () => {
+    console.log("Logging in with:", { username, password });
   };
-  const responseGoogle = (response) => {
-    console.log(response);
+  const handleLoginWithGoogle = () => {
+    console.log("Logging in with Google");
   };
 
   return (
@@ -56,13 +39,14 @@ const Login = () => {
         </button>
       </form>
       <div className="google-login-container">
-        <GoogleLogin
-          clientId={clientId}
-          buttonText="Continue with Google"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-          cookiePolicy={"single_host_origin"}
-        />
+        <button type="button" onClick={handleLoginWithGoogle}>
+          <img
+            src="/Images/Google__G__Logo.svg.png"
+            alt="Google Logo"
+            className="google-logo"
+          />
+          Continue with Google
+        </button>
       </div>
     </div>
   );
