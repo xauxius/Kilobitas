@@ -1,7 +1,14 @@
 import { Stack } from "@mui/material";
 import ItemEditView from "./ItemEditView";
+import { useEffect, useState } from "react";
 
 const ItemEditing = (props) => {
+    const [showImage, setShowImage] = useState("/Images/blank.jpg");
+
+    useEffect(() => {
+        props.image && setShowImage(URL.createObjectURL(props.image));
+    }, [props.image])
+
     const changeImage = (e) => {
         props.setImage(e.target.files[0]);
     }    
@@ -35,6 +42,7 @@ const ItemEditing = (props) => {
         <ItemEditView 
             item={props.item} 
             image={props.image}
+            showImage={showImage}
             changeImage={changeImage}
             changeName={changeName}
             changeAmount={changeAmount}

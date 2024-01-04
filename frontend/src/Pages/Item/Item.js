@@ -4,6 +4,9 @@ import ItemMinimalView from "../../Components/Item/ItemMinimalView"
 import { CircularProgress, Stack } from "@mui/material"
 import { useParams } from "react-router-dom"
 import itemsClient from "../../Services/itemsService"
+import recommendedClient from "../../Services/recommendedService"
+import sessionService from "../../Services/sessionService"
+
 
 const Item = (props) => {
     const [ item, setItem ] = useState();
@@ -12,7 +15,10 @@ const Item = (props) => {
 
     useEffect(() => {
         itemsClient.getItem(id).then(res => setItem(res.data));
-        //itemsClient.getRecommended(id).then(res => setRecommended(res.data));
+        sessionService.getSessionId().then(res => 
+            recommendedClient.postSessionView(res, id)
+        );
+        recommendedClient.getRecommended(id).then(res => setRecommended(res.data));
     }, [id]);
 
     return <div style={{padding: 20}}>

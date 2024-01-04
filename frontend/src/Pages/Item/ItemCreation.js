@@ -13,7 +13,7 @@ const ItemEdit = () => {
 
     return <Stack spacing={2} style={{padding: 50, width: 600} }> 
         <ItemEditing 
-            item={item} 
+            item={item}
             setItem={setItem}
             image={image}
             setImage={setImage}

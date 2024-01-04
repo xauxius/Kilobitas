@@ -1,5 +1,4 @@
 ﻿using API.Models;
-using API.Models.DTO;
 using MongoDB.Driver;
 
 namespace API.Services
@@ -46,6 +45,10 @@ namespace API.Services
                     }
                 }
             }
+
+            var update = Builders<Sesija>.Update.Set(s => s.Atnaujinta_Rekomendacijose, true);
+
+            _sessions_collection.UpdateMany(s => !s.Atnaujinta_Rekomendacijose, update);
         }
 
         public Guid StartSession()
@@ -53,6 +56,11 @@ namespace API.Services
             var session = new Sesija();
             _sessions_collection.InsertOne(session);
             return session.Id;
+        }
+
+        public IEnumerable<Sesija> GetSessions()
+        {
+            return _sessions_collection.Find(Builders<Sesija>.Filter.Empty).ToEnumerable();
         }
 
         public void AddViewedItem(Guid session_id, Guid item_id)
@@ -64,6 +72,11 @@ namespace API.Services
                 _session_viewed_collection.InsertOne(sessionView);
 
             }
+        }
+
+        public IEnumerable<Sesijos_Perziureta_Preke> GetViewed(Guid session_id)
+        {
+            return _session_viewed_collection.Find(sv => sv.Sesijos_Id == session_id).ToEnumerable();
         }
 
         public IEnumerable<Preke> GetRecommended(Guid id)
@@ -82,6 +95,43 @@ namespace API.Services
         private Guid findOtherId(Taip_Pat_Domejosi av, Guid id)
         {
             return av.PrekesA_Id == id ? av.PrekesB_Id : av.PrekesA_Id;
+        }
+
+        public void AddRelations(Preke item)
+        {
+            var other_items = _item_collection.Find(i => i.Id != item.Id).ToList();
+            var av_list = new List<Taip_Pat_Domejosi>();
+
+            foreach (var other_item in other_items)
+            {
+                var av = new Taip_Pat_Domejosi(item.Id, other_item.Id);
+                av_list.Add(av);
+            }
+
+            _also_viewed_collection.InsertMany(av_list);
+        }
+
+        public void RecreateRelations()
+        {
+            _also_viewed_collection.DeleteMany(Builders<Taip_Pat_Domejosi>.Filter.Empty);
+            var items = _item_collection.Find(Builders<Preke>.Filter.Empty).ToList();
+            var av_list = new List<Taip_Pat_Domejosi>();
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                for (int j = i + 1;  j < items.Count; j++)
+                {
+                    var av = new Taip_Pat_Domejosi(items[i].Id, items[j].Id);
+                    av_list.Add(av);
+                }
+            }
+
+            _also_viewed_collection.InsertMany(av_list);
+        }
+
+        public void RemoveRelations(Guid item_id)
+        {
+            _also_viewed_collection.DeleteMany(av => av.PrekesA_Id == item_id || av.PrekesB_Id == item_id);
         }
     }
 }

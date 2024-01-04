@@ -8,7 +8,7 @@ import Profile from "./Pages/Profile";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Admin from "./Pages/Admin";
-import ItemAdministration from "./Pages/ItemAdministration";
+import ItemAdministration from "./Pages/Item/ItemAdministration";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Item from "./Pages/Item/Item";
 import ItemEdit from "./Pages/Item/ItemEdit";

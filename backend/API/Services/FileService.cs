@@ -31,7 +31,7 @@
             return memoryStream;
         }
 
-        public bool DeleteFileAsync(string fileName)
+        public bool DeleteFile(string fileName)
         {
             var filePath = Path.Combine(_fileDirectory, fileName);
             if (File.Exists(filePath))

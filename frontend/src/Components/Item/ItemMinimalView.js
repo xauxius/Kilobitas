@@ -1,13 +1,13 @@
 import { Card, CardActionArea, CardMedia, Checkbox, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import itemsClient from "../../Services/itemsService";
+import imageClient from "../../Services/imageService";
 
 const ItemMinimalView = (props) => {
     const [image, setImage] = useState("");
 
     useEffect(() => {
-        props.item.paveikslelis && itemsClient.getImage(props.item.paveikslelis).then(res => setImage(res));
+        props.item.paveikslelis && imageClient.getImage(props.item.paveikslelis).then(res => setImage(res));
     }, [props.item])
 
     return <Card sx={{ maxWidth: 200 }}>

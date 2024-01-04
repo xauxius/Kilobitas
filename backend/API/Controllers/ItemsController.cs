@@ -11,11 +11,15 @@ namespace API.Controllers
     public class ItemsController : ControllerBase
     {
         private ItemsService _itemsService;
+        private RecommendedService _recommendedService;
+        private FileService _fileService;
         private readonly IMapper _mapper;
 
-        public ItemsController(ItemsService itemsService, IMapper mapper)
+        public ItemsController(ItemsService itemsService, RecommendedService recommendedService, FileService fileService, IMapper mapper)
         {
             _itemsService = itemsService;
+            _recommendedService = recommendedService;
+            _fileService = fileService;
             _mapper = mapper;
         }
 
@@ -38,6 +42,7 @@ namespace API.Controllers
         {
             item.Id = Guid.NewGuid();
             _itemsService.AddItem(item);
+            _recommendedService.AddRelations(item);
 
             return Ok(_mapper.Map<PrekeDTO>(item));
         }
@@ -45,6 +50,9 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteItem(Guid id)
         {
+            var item = _itemsService.GetItem(id);
+            _recommendedService.RemoveRelations(id);
+            _fileService.DeleteFile(item.Paveikslelis);
             _itemsService.DeleteItem(id);
             return Ok();
         }

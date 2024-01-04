@@ -42,7 +42,7 @@ const ItemEditView = (props) => {
 
     return <>
             <input type="file" onChange={props.changeImage} />
-            <img src="public/Images/proc.jpg" width="300" height="300"></img>
+            <img src={props.showImage} width="300" height="300"></img>
             <TextField
                 required
                 id="pavadinimas"

@@ -1,11 +1,11 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import itemsClient from "../../Services/itemsService";
+import imageClient from "../../Services/imageService";
 const ItemFullView = (props) => {
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    props.item.paveikslelis && itemsClient.getImage(props.item.paveikslelis).then(res => setImage(res));
+    props.item.paveikslelis && imageClient.getImage(props.item.paveikslelis).then(res => setImage(res));
   }, [props.item])
 
   return (
