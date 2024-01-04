@@ -28,11 +28,5 @@ namespace API.Models
         [BsonElement("Sukurimo_data")]
         public DateTime Sukurimo_data { get; set; }
 
-        [BsonElement("TagIds")]
-        public List<Guid> TagIds { get; set; } = new List<Guid>();
-
-        [BsonElement("TagsArray")]
-        public List<Zyme> Tags { get; set; }
-
     }
 }

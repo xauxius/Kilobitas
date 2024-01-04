@@ -1,6 +1,6 @@
 ﻿import '../Pages/Styles/Discussions.css';
 import React, { useState, useEffect } from 'react';
-import { searchTags, createTag } from '../Services/tagService';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 const DiscussionForm = ({ onSubmit }) => {
@@ -11,56 +11,44 @@ const DiscussionForm = ({ onSubmit }) => {
         Kurėjo_vardas: '',
         Kurėjo_Pavardė: '',
         Sukurimo_data: new Date(),
-        TagIds: []
     });
+    const navigate = useNavigate();
+    const handleBack = () => {
+        navigate('/Diskusijos'); // This is the route you want to go back to
+    };
+    const hardcodedCategories = ['Be kategorijos', 'Sportas', 'Mokslas', 'Menai', 'Politika', 'Gamta', 'Kelionės', 'Maistas', 'Sveikata', 'Muzika'];
 
-    const [tags, setTags] = useState([]);
-    const [suggestedTags, setSuggestedTags] = useState([]);
-    const hardcodedCategories = ['Technologijos', 'Sportas', 'Mokslas', 'Menai', 'Politika', 'Gamta', 'Kelionės', 'Maistas', 'Sveikata', 'Muzika'];
-
-    useEffect(() => {
-        // Assuming searchTags fetches all tags when called with an empty string
-        const loadInitialData = async () => {
-            const fetchedTags = await searchTags('');
-            setSuggestedTags(fetchedTags);
-        };
-
-        loadInitialData();
-    }, []);
 
     const handleChange = (event) => {
-        if (event.target.name === "TagIds") {
-            const inputTags = event.target.value.split(',').map(tag => tag.trim());
-            setFormData({ ...formData, [event.target.name]: inputTags });
-        } else {
-            setFormData({ ...formData, [event.target.name]: event.target.value });
+        if (event.target.name === 'Pavadinimas' && event.target.value.length > 225) {
+            alert('Pavadinimas negali buti ilgesnis nei 225 raidės.');
+            return;
         }
-    };
-
-    const handleTagInput = async (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            const input = event.target.value.trim();
-            if (input && input.startsWith('#')) {
-                const tagName = input.slice(1);
-                let existingTag = tags.find(tag => tag.Žymės_pavadinimas.toLowerCase() === tagName.toLowerCase());
-                if (!existingTag) {
-                    existingTag = await createTag({ Žymės_pavadinimas: tagName });
-                    setTags([...tags, existingTag]);
-                }
-                event.target.value = '';
+        if (event.target.name === 'Kurėjo_vardas' || event.target.name === 'Kurėjo_Pavardė') {
+            if (event.target.value.split(' ').length > 1) {
+                alert('Vardas ir Pavardė turi buti iš vieno žodžio.');
+                return;
             }
         }
+        setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
 
-    const handleSubmit = async (event) => {
+
+
+    const handleSubmit = async (event) =>
+    {
         event.preventDefault();
-        const tagIdsForSubmission = tags.map(tag => tag.Id);
+
+        if (!formData.Pavadinimas.trim() || !formData.Turinys.trim() || !formData.Kurėjo_Pavardė.trim() || !formData.Kurėjo_vardas.trim()) {
+            alert('Visi laukai turi buti užpildyti.');
+            return;
+        }
+
         const payload = {
             ...formData,
-            TagIds: tagIdsForSubmission
         };
+
         try {
             const response = await fetch('https://localhost:7259/PostDiscussion', {
                 method: 'POST',
@@ -69,23 +57,30 @@ const DiscussionForm = ({ onSubmit }) => {
                 },
                 body: JSON.stringify(payload)
             });
-
+            if (response.ok) {
+                alert('Discussion successfully added.');
+                navigate('/Diskusijos');
+            }
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const result = await response.json();
             console.log('Success:', result);
+            navigate('/Diskusijos');
             // Handle the successful submission, e.g., by resetting the form or redirecting the user
         } catch (error) {
             console.error('Error:', error);
             // Handle the error, e.g., by displaying a message to the user
         }
+
     };
     return (
         <div className="container2">
             <form id="newDiscussionForm" onSubmit={handleSubmit}>
                 <div className="posts-table">
+                    <button type="button" onClick={handleBack} className="search-box button">Atgal į Diskusijas</button>
+
                     <div className="table-head">
                         <div className="status">
                             <label htmlFor="pavadinimasInput">Pavadinimas:</label>
@@ -126,22 +121,6 @@ const DiscussionForm = ({ onSubmit }) => {
                             ))}
                         </select>
                     </div>
-                    <div className="status">
-                        <label htmlFor="tagInput">Žymės:</label>
-                        <input
-                            type="text"
-                            id="tagInput"
-                            placeholder="Type and press 'Enter' to add tag"
-                            onKeyDown={handleTagInput} // Changed from onChange to onKeyDown
-                            className="input-style21"
-                        />
-                    </div>
-                    <div className="status">
-                        {/* Displaying added tags */}
-                        {tags.map((tag, index) => (
-                            <span key={index} className="tag">{tag.Žymės_pavadinimas}</span>
-                        ))}
-                    </div>
                     <div className="table-row">
                         <div className="status">
                             <label htmlFor="vardasInput">Kurėjo vardas:</label>
@@ -167,7 +146,7 @@ const DiscussionForm = ({ onSubmit }) => {
                         </div>
                     </div>
                 </div>
-                <button type="submit" className="search-box button">Submit</button>
+                <button type="submit" className="search-box button">Sukurti</button>
             </form>
         </div>
     );

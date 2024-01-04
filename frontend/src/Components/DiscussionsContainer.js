@@ -7,9 +7,7 @@ const DiscussionsContainer = ({ discussions }) => {
             {/* Loop through the discussions array and render each discussion */}
             {discussions.map(discussion => (
                 <div key={discussion.id} className="subforum">
-                    <div className="subforum-title">
-                        <h1>{discussion.pavadinimas}</h1>
-                    </div>
+                    
                     <div className="subforum-row">
                         <div className="subforum-icon subforum-column center">
                             <i className="fa fa-user center"></i>
@@ -20,11 +18,8 @@ const DiscussionsContainer = ({ discussions }) => {
                             </Link></h4>
                             <p>{discussion.turinys}</p>
                         </div>
-                        <div className="subforum-stats subforum-column center">
-                            <span>Žymės: {discussion.tagIds.length}</span>
-                        </div>
                         <div className="subforum-info subforum-column">
-                            <b><a href="#">post</a></b> by <a href="#">{discussion.kurejo_vardas}</a>
+                            <b><a href="#">post</a></b> by <a href="#">{discussion.kurėjo_vardas}</a>
                             <br />on <small>{new Date(discussion.sukurimo_data).toLocaleDateString()}</small>
                         </div>
                     </div>

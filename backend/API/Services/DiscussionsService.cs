@@ -11,21 +11,17 @@ namespace API.Services
     public class DiscussionsService
     {
         private readonly IMongoCollection<Discussion> _discussionCollection;
-        private readonly IMongoCollection<Zyme> _tagCollection;
-        private readonly TagsService _tagsService;
 
 
         public DiscussionsService(MongoDatabase database)
         {
             _discussionCollection = database.Database.GetCollection<Discussion>("Discussions");
-            _tagCollection = database.Database.GetCollection<Zyme>("Tags");
         }
 
         public List<Discussion> GetDiscussions()
         {
             var discussions = _discussionCollection
                                 .Aggregate()
-                                .Lookup("Tags", "TagIds", "_id", "TagsArray") // "TagsArray" is the new field that will contain the joined data
                                 .As<Discussion>()
                                 .ToList();
 
@@ -34,15 +30,17 @@ namespace API.Services
 
         public Discussion GetDiscussion(Guid id)
         {
-            var discussion = _discussionCollection
-                                .Aggregate()
-                                .Match(new BsonDocument("_id", id))
-                                .Lookup("Tags", "TagIds", "_id", "Tags")
-                                .As<Discussion>()
-                                .FirstOrDefault();
-
-            return discussion;
+            var discussions = _discussionCollection.Find(_ => true).ToList();
+            return discussions.FirstOrDefault(d => d.Id == id);
         }
+
+        public List<Discussion> GetDiscussionsByCategory(string category)
+        {
+            return _discussionCollection.Find(d => d.Kategorija == category).ToList();
+        }
+
+
+
 
         public void AddDiscussion(Discussion discussion)
         {
@@ -62,19 +60,9 @@ namespace API.Services
                 .Set(d => d.Kategorija, discussionToUpdate.Kategorija)
                 .Set(d => d.Kurėjo_vardas, discussionToUpdate.Kurėjo_vardas)
                 .Set(d => d.Kurėjo_Pavardė, discussionToUpdate.Kurėjo_Pavardė)
-                .Set(d => d.Sukurimo_data, discussionToUpdate.Sukurimo_data)
-                .Set(d => d.TagIds, discussionToUpdate.TagIds); // Assuming TagIds is the field where tag references are stored
+                .Set(d => d.Sukurimo_data, discussionToUpdate.Sukurimo_data);
 
             _discussionCollection.UpdateOne(discussion => discussion.Id == id, updateDef);
-        }
-        public void AddOrUpdateTagsToDiscussion(Guid diskusijaId, List<string> tagLabels)
-        {
-            foreach (var label in tagLabels)
-            {
-                var tag = _tagsService.CreateOrGetTag(label);
-                var diskusijaZyme = new DiskusijaZyme { DiskusijaId = diskusijaId, ZymeId = tag.Id };
-                // Insert DiskusijaZyme into the collection
-            }
         }
     }
 }

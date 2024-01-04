@@ -54,6 +54,18 @@ namespace API.Controllers
             return NoContent();
         }
 
+        [HttpGet("/ListDiscussionsByCategory/{category}")]
+        public ActionResult<List<Discussion>> GetDiscussionsByCategory(string category)
+        {
+            if (string.IsNullOrEmpty(category))
+            {
+                return Ok(_discussionsService.GetDiscussions());
+            }
+            return Ok(_discussionsService.GetDiscussionsByCategory(category));
+        }
+
+
+
         [HttpPut("/PutDiscussion/{id}")]
         public IActionResult UpdateDiscussion(Guid id, Discussion discussionToUpdate)
         {

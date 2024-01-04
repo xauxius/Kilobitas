@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import NavBar from '../Components/DiscussionNavBar';
 import DiscussionsContainer from '../Components/DiscussionsContainer';
 import ForumInfo from '../Components/ForumInfo';
@@ -7,30 +7,58 @@ import './Styles/Discussions.css';
 
 
 const DiskusijosPage = () => {
+    const [showFilters, setShowFilters] = useState(false);
     const [discussions, setDiscussions] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const hardcodedCategories = [ 'Sportas', 'Mokslas', 'Menai', 'Politika', 'Gamta', 'Kelionės', 'Maistas', 'Sveikata', 'Muzika'];
+
+    const toggleFilters = () => {
+        setShowFilters(!showFilters);
+    };
 
     useEffect(() => {
         const fetchDiscussions = async () => {
             try {
-                const response = await fetch('https://localhost:7259/ListDiscussions');
+                let url = `https://localhost:7259/ListDiscussions${selectedCategory ? 'ByCategory/' + selectedCategory : ''}`;
+                const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
                 setDiscussions(data);
-                console.log(data);
             } catch (error) {
                 console.error("Failed to fetch discussions:", error);
-                setDiscussions([]); // If the fetch fails, set discussions to an empty array or handle accordingly
+                setDiscussions([]); // Handle error
             }
         };
 
         fetchDiscussions();
-    }, []);
+    }, [selectedCategory]);
+
+    const handleCategoryChange = (event) => {
+        setSelectedCategory(event.target.value);
+    };
 
     return (
         <div>
             <NavBar />
+            <button onClick={toggleFilters}>{showFilters ? 'Slepti Filtrus' : 'Rodyti Filtrus'}</button>
+
+            {showFilters && (
+                <div className="category-selector">
+                    <div className="category-selector">
+                        <label htmlFor="category-dropdown">Select a Category: </label>
+                        <select id="category-dropdown" value={selectedCategory} onChange={handleCategoryChange}>
+                            <option value="">All Categories</option>
+                            {hardcodedCategories.map((category, index) => (
+                                <option key={index} value={category}>{category}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+            )}
+            
+
             <Grid container spacing={2} sx={{ padding: 3 }}>
                 <Grid item xs={12}>
                     {discussions ? (

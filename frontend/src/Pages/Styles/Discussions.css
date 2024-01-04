@@ -48,6 +48,12 @@ h1{
     background-color: #131415;
 }
 
+.category-selector {
+    border: 1px solid #ddd; /* Example border style, you can adjust it as needed */
+    padding: 10px;
+    margin: 10px 0;
+}
+
 .posts-table {
     flex: 2;
     margin-left: 20px; /* Adjust as needed */
@@ -309,23 +315,25 @@ header{
     padding: 10px;
 }
 
-.search-box button{
-    padding: 10px;
-    background-color:#fff;
-    color:#000000;
-}
+    .search-box button {
+        padding: 10px;
+        background-color: #FF0042; /* This sets the background color to match the link color */
+        color: #FEFEFE;
+    }
 
-.search-box button:hover{
-    background-color: #000000;
-    color: #fff;
-    box-shadow: 1px 2px 3px #fff;
-}
+        .search-box button:hover {
+            background-color: #FF0042; /* This sets the background color to match the link color */
+            color: #FEFEFE;
+            box-shadow: 1px 2px 3px #fff;
+        }
 
 /* search box for smrtphones */
 @media screen and (max-width: 460px){
-    .search-box input, .search-box button, .search-box select{
+    .search-box input, .search-box button, .search-box select {
         min-width: 300px;
         margin-top: 5px;
+        background-color: #FF0042; /* This sets the background color to match the link color */
+        color: #FEFEFE;
     }    
 
 }
@@ -497,14 +505,16 @@ footer{
     max-height: 80px;
 }
 
-.body .content .comment button{
-    border:none;
-    padding:10px;
-    font-weight: bolder;
-    box-shadow: 4px 6px #fff;
-    cursor: pointer;
-    float: right;
-}
+    .body .content .comment button {
+        border: none;
+        padding: 10px;
+        font-weight: bolder;
+        box-shadow: 4px 6px #fff;
+        cursor: pointer;
+        float: right;
+        background-color: #FF0042; /* This sets the background color to match the link color */
+        color: #FEFEFE;
+    }
 
 /* comment section */
 .comment-area{
@@ -530,6 +540,55 @@ footer{
 }
 
 
+.discussion-container {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.discussion-nav button {
+    background-color: #FF0042; /* Match this to your link color if needed */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px; /* Space between the button and the table */
+}
+
+    .discussion-nav button:hover {
+        opacity: 0.8;
+    }
+
+.discussion-table {
+    width: 100%;
+    border-collapse: collapse; /* For older browsers */
+}
+
+.discussion-details {
+    border: 1px solid #fff; /* White border for the table cells */
+    padding: 15px;
+    margin-bottom: 10px; /* Space between rows */
+}
+
+    .discussion-details h2,
+    .discussion-details p,
+    .discussion-details div {
+        margin-bottom: 10px;
+    }
+
+    .discussion-details button {
+        background-color: #FF0042; /* Match this to your link color if needed */
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        margin-right: 10px; /* Space between buttons */
+    }
+
+        .discussion-details button:hover {
+            opacity: 0.8;
+        }
 
 
 
