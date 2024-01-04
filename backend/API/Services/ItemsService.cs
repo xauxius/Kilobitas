@@ -41,7 +41,8 @@ namespace API.Services
                 .Set(i => i.Aprasymas, item.Aprasymas)
                 .Set(i => i.Kaina, item.Kaina)
                 .Set(i => i.Kiekis, item.Kiekis)
-                .Set(i => i.Tipas, item.Tipas);
+                .Set(i => i.Tipas, item.Tipas)
+                .Set(i => i.Paveikslelis, item.Paveikslelis);
 
             _collection.UpdateOne(item => item.Id == id, updateDef);
         }

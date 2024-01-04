@@ -1,10 +1,16 @@
 import baseClient from "./baseClient";
+import imageClient from "./imageService";
 
 class ItemsClient {
     path = "/items";
 
     async createItem(item, image) {
-        const filePath = (await this.postImage(image)).data.filePath;
+        let filePath;
+        if (image) {
+            filePath = (await imageClient.postImage(image)).data.filePath;
+        } else {
+            filePath = "default.jpg"
+        }
         item.paveikslelis = filePath;
         return await baseClient.post(this.path, item);
     }
@@ -18,7 +24,12 @@ class ItemsClient {
         return await baseClient.get(this.path+"/"+id);
     }
 
-    async updateItem(id, item) {
+    async updateItem(id, item, image) {
+        if (image) {
+            let filePath = (await imageClient.postImage(image)).data.filePath;
+            item.paveikslelis = filePath;
+        }
+        console.log(item);
         await baseClient.patch(this.path+"/"+id, item);
     }
 
@@ -28,23 +39,6 @@ class ItemsClient {
 
     async getItemTypes() {
         return await baseClient.get("enums/item-types");
-    }
-
-    async getImage(imageId) {
-        const response = await baseClient.get("images/"+imageId, { responseType: "blob" });
-        const localUrl = URL.createObjectURL(response.data);
-        return localUrl;
-    }
-
-    async postImage(image) {
-        const formData = new FormData();
-        formData.append("image", image);
-
-        return await baseClient.post("images/", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data"
-            }
-        });
     }
 
     async getRecommended(itemId) {
