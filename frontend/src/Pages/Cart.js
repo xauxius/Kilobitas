@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import cartClient from '../Services/cartService';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -86,23 +87,30 @@ const Cart = () => {
           kiekis: item.kiekis,
           pavadinimas: item.pavadinimas,
           kaina: item.kaina,
+          
         })),
       };
   
       const insertedMokejimas = await cartClient.insertMokejimas(cartItems);
       await cartClient.deleteAllCart(cartItems[0].vartotojo_id);
       fetchCart();
+     // const form = document.getElementById('checkoutForm');
+      //form.submit()
     } catch (error) {
       console.error('Error during checkout:', error);
       alert("Įvyko klaida apmokant užsakymą. Bandykite dar kartą.");
     }
   };
-
+  
   return (
     <div className="container mt-4">
+      <Link to="/">
+                  Gryžti į pradžia
+            </Link>
       <h2>Prekių krepšelis</h2>
       {cartItems.length === 0 ? (
         <p>Jūsų prekių krepšelis tuščias</p>
+        
       ) : (
         <div>
           <ul className="list-group">
@@ -136,9 +144,11 @@ const Cart = () => {
           <div className="mt-3">
             <strong>Bendra suma: {totalAmount.toFixed(2)} Eur</strong>
           </div>
-          <button className="btn btn-primary mt-3" onClick={handleCheckout}>
-            Apmokėti
-          </button>
+          <form id="checkoutForm" action="/create-checkout-session" method="POST">
+            <button type="button" className="btn btn-primary mt-3" onClick={handleCheckout}>
+          Apmokėti
+        </button>
+      </form>
         </div>
       )}
     </div>

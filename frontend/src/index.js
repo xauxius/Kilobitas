@@ -14,6 +14,7 @@ import Item from "./Pages/Item";
 import ItemEdit from "./Pages/ItemEdit";
 import ItemCreation from "./Pages/ItemCreation";
 import PAY from "./Pages/pay";
+import Order from "./Pages/order";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 localStorage.setItem('naudotojas', '731a5d96-75c1-4044-9418-b72e03396625');
@@ -33,6 +34,7 @@ root.render(
         <Route path="/Prekės-kūrimas" element={<ItemCreation />} />
         <Route path="/Prekės-redagavimas/:id" element={<ItemEdit />} />
         <Route path="/pay" element={<PAY />} />
+        <Route path="/order" element={<Order />} />
       </Routes>
     </Router>
   </React.StrictMode>

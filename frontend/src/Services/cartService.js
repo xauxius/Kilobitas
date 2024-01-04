@@ -28,6 +28,9 @@ class CartClient {
     async getMokejimas(id) {
         return await baseClient.get(this.path+"/mokejimas/"+id);
     }
+    async apmoketi() {
+        return await baseClient.post(this.path+"/create-checkout-session");
+    }
 }
 
 const cartClient = new CartClient();
