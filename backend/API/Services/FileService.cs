@@ -31,12 +31,8 @@
             return memoryStream;
         }
 
-        public bool DeleteFile(string fileName)
+        public bool DeleteFileAsync(string fileName)
         {
-            if (fileName == "default.jpg")
-            {
-                return true;
-            }
             var filePath = Path.Combine(_fileDirectory, fileName);
             if (File.Exists(filePath))
             {

@@ -40,7 +40,7 @@ namespace API.Controllers
         [HttpDelete]
         public IActionResult DeleteFile(string fileName)
         {
-            var result = _fileService.DeleteFile(fileName);
+            var result = _fileService.DeleteFileAsync(fileName);
             if (result)
                 return Ok();
 
