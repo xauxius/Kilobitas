@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Legion\\Desktop\\kilobitas\\Kilobitas\\backend\\API\\API.csproj": {}
+    "C:\\Users\\Legion\\Desktop\\kilobitas\\backend\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Legion\\Desktop\\kilobitas\\Kilobitas\\backend\\API\\API.csproj": {
+    "C:\\Users\\Legion\\Desktop\\kilobitas\\backend\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Legion\\Desktop\\kilobitas\\Kilobitas\\backend\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Legion\\Desktop\\kilobitas\\backend\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Legion\\Desktop\\kilobitas\\Kilobitas\\backend\\API\\API.csproj",
+        "projectPath": "C:\\Users\\Legion\\Desktop\\kilobitas\\backend\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Legion\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Legion\\Desktop\\kilobitas\\Kilobitas\\backend\\API\\obj\\",
+        "outputPath": "C:\\Users\\Legion\\Desktop\\kilobitas\\backend\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Legion\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -55,6 +55,10 @@
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.22.0, )"
+            },
+            "Stripe.Net": {
+              "target": "Package",
+              "version": "[43.8.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

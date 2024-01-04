@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import cartClient from '../Services/cartService';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
-    // Fetch cart items when the component mounts
     fetchCart();
   }, []);
 
+  useEffect(() => {
+
+    calculateTotalAmount();
+  }, [cartItems]);
+
   const fetchCart = async () => {
     try {
-      // Assuming you have a user ID, replace 'userId' with the actual user ID
-      const userId = '16298cb0-a1c4-4c67-bcaa-417722bdfb33';
+     
+      const userId = localStorage.getItem('naudotojas');
 
-      // Fetch cart items using the getCart method from cartClient
+
       const response = await cartClient.getCart(userId);
 
-      // Assuming the response data is an array of cart items
+  
       setCartItems(response.data);
     } catch (error) {
       console.error('Error fetching cart:', error);
@@ -27,10 +33,15 @@ const Cart = () => {
   const updateCart = async (id, item) => {
     try {
       await cartClient.updateCart(id, item);
-      fetchCart(); // Refresh the cart after updating
+      fetchCart(); 
     } catch (error) {
       console.error('Error updating cart:', error);
     }
+  };
+
+  const calculateTotalAmount = () => {
+    const total = cartItems.reduce((acc, item) => acc + item.kiekis * item.kaina, 0);
+    setTotalAmount(total);
   };
 
   const handleIncreaseQuantity = async (itemId) => {
@@ -39,7 +50,6 @@ const Cart = () => {
     );
     setCartItems(updatedCartItems);
 
-    // Assuming item object contains the necessary data for updating the quantity
     const itemToUpdate = updatedCartItems.find((item) => item.id === itemId);
     if (itemToUpdate) {
       await updateCart(itemId, { kiekis: itemToUpdate.kiekis });
@@ -52,85 +62,87 @@ const Cart = () => {
     );
     setCartItems(updatedCartItems);
 
-    // Assuming item object contains the necessary data for updating the quantity
     const itemToUpdate = updatedCartItems.find((item) => item.id === itemId);
     if (itemToUpdate) {
       await updateCart(itemId, { kiekis: itemToUpdate.kiekis });
     }
   };
 
-  const handleRemoveItem = (itemId) => {
-    // Logic to remove the item from the cart
-    // Update the state or make a request to the server if needed
+  const handleRemoveItem = async (itemId) => {
+    try {
+      await cartClient.deleteCart(itemId);
+      fetchCart();
+    } catch (error) {
+      console.error('Error removing item from cart:', error);
+    }
   };
 
-  const handleCheckout = () => {
-    // Logic for the checkout process
-    // Redirect to the payment page or perform any necessary actions
+  const handleCheckout = async () => {
+    try {
+      const mokejimasData = {
+        items: cartItems.map((item) => ({
+          preke_id: item.id,
+          vartotojo_id: item.vartotojo_id,
+          kiekis: item.kiekis,
+          pavadinimas: item.pavadinimas,
+          kaina: item.kaina,
+        })),
+      };
+  
+      const insertedMokejimas = await cartClient.insertMokejimas(cartItems);
+      await cartClient.deleteAllCart(cartItems[0].vartotojo_id);
+      fetchCart();
+    } catch (error) {
+      console.error('Error during checkout:', error);
+      alert("Įvyko klaida apmokant užsakymą. Bandykite dar kartą.");
+    }
   };
 
   return (
-    <div>
+    <div className="container mt-4">
       <h2>Prekių krepšelis</h2>
       {cartItems.length === 0 ? (
         <p>Jūsų prekių krepšelis tuščias</p>
       ) : (
         <div>
-          <ul style={styles.cartList}>
+          <ul className="list-group">
             {cartItems.map((item) => (
-              <li key={item.id} style={styles.cartItem}>
-                <div style={styles.itemName}>{item.pavadinimas}</div>
-                <div style={styles.itemQuantity}>
-                  <button onClick={() => handleDecreaseQuantity(item.id)}>-</button>
-                  {item.kiekis}
-                  <button onClick={() => handleIncreaseQuantity(item.id)}>+</button>
+              <li key={item.id} className="list-group-item">
+                <div className="row">
+                  <div className="col-6 d-flex align-items-center">
+                    <div>{item.pavadinimas}</div>
+                  </div>
+                  <div className="col-3 d-flex align-items-center">
+                    <div className="input-group">
+                      <button className="btn btn-outline-secondary" type="button" onClick={() => handleDecreaseQuantity(item.id)}>
+                        -
+                      </button>
+                      <span className="input-group-text">{item.kiekis}</span>
+                      <button className="btn btn-outline-secondary" type="button" onClick={() => handleIncreaseQuantity(item.id)}>
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div className="col-3 d-flex align-items-center justify-content-end">
+                    <div className="mr-3">{item.kaina}</div>
+                    <button className="btn btn-danger mx-3" onClick={() => handleRemoveItem(item.id)}>
+                      Ištrinti
+                    </button>
+                  </div>
                 </div>
-                <div style={styles.itemPrice}>{item.kaina}</div>
-                <button style={styles.removeButton} onClick={() => handleRemoveItem(item.id)}>
-                  Ištrinti
-                </button>
               </li>
             ))}
           </ul>
-          <button onClick={handleCheckout}>Apmokėti</button>
+          <div className="mt-3">
+            <strong>Bendra suma: {totalAmount.toFixed(2)} Eur</strong>
+          </div>
+          <button className="btn btn-primary mt-3" onClick={handleCheckout}>
+            Apmokėti
+          </button>
         </div>
       )}
     </div>
   );
-};
-
-const styles = {
-  cartList: {
-    listStyle: 'none',
-    padding: 0,
-  },
-  cartItem: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottom: '1px solid #ccc',
-    marginBottom: '10px',
-    paddingBottom: '10px',
-  },
-  itemName: {
-    flex: 2,
-  },
-  itemQuantity: {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  itemPrice: {
-    flex: 1,
-  },
-  removeButton: {
-    backgroundColor: '#ff4d4d',
-    color: 'white',
-    padding: '8px',
-    border: 'none',
-    cursor: 'pointer',
-  },
 };
 
 export default Cart;

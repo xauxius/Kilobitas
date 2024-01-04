@@ -18,6 +18,16 @@ class CartClient {
     async deleteCart(id) {
         await baseClient.delete(this.path+"/"+id);
     }
+    async deleteAllCart(id) {
+        await baseClient.delete(this.path + "/deleteAll/"+id);
+    }
+
+    async insertMokejimas(items) {
+        return await baseClient.post(this.path + "/insertmokejimas", items);
+    }
+    async getMokejimas(id) {
+        return await baseClient.get(this.path+"/mokejimas/"+id);
+    }
 }
 
 const cartClient = new CartClient();

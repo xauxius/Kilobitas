@@ -13,8 +13,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Item from "./Pages/Item";
 import ItemEdit from "./Pages/ItemEdit";
 import ItemCreation from "./Pages/ItemCreation";
+import PAY from "./Pages/pay";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+localStorage.setItem('naudotojas', '731a5d96-75c1-4044-9418-b72e03396625');
 root.render(
   <React.StrictMode>
     <Router>
@@ -30,6 +32,7 @@ root.render(
         <Route path="/Prekių-administravimas" element={<ItemAdministration />} />
         <Route path="/Prekės-kūrimas" element={<ItemCreation />} />
         <Route path="/Prekės-redagavimas/:id" element={<ItemEdit />} />
+        <Route path="/pay" element={<PAY />} />
       </Routes>
     </Router>
   </React.StrictMode>

@@ -40,6 +40,39 @@ namespace API.Controllers
 			_itemsService.DeleteKrepselis(id);
 			return Ok();
 		}
+		[HttpDelete("deleteAll/{id}")]
+		public IActionResult DeleteAllKrepselis(Guid id)
+		{
+			_itemsService.DeleteAllKrepselis(id);
+			return Ok();
+		}
+		[HttpPost("insertmokejimas")]
+		public IActionResult InsertMokejimas(List<PrekiuKrepselis> items)
+		{
+			var mokejimas = _itemsService.InsertMokejimas(items);
+
+			if (mokejimas != null)
+			{
+				return Ok(mokejimas);
+			}
+			else
+			{
+				return BadRequest("Nepavyko sukurti mokejimo. Patikrinkite prekių ID arba kitus duomenis.");
+			}
+		}
+		[HttpGet("mokejimas/{id}")]
+		public IActionResult GetMokejimai(Guid id)
+		{
+			var mokejimai = _itemsService.GetMokejimai(id);
+
+			if (mokejimai.Count == 0)
+			{
+				return NotFound();
+			}
+
+			return Ok(mokejimai);
+		}
+
 
 		[HttpPatch("{id}")]
 		public IActionResult UpdateItem(Guid id, Krepselis item)

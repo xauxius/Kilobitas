@@ -13,7 +13,7 @@ const ItemFullView = (props) => {
 
   const addToCart = async () => {
     try {
-      const cartItem = new cart( props.item.id, props.item.id, props.item.id, 1);
+      const cartItem = new cart( props.item.id, props.item.id, localStorage.getItem('naudotojas'), 1);
 
       await cartClient.createCart(cartItem);
 
