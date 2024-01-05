@@ -34,14 +34,18 @@ namespace API.Services
                         var id1 = viewed_in_session[i].Prekes_Id;
                         var id2 = viewed_in_session[j].Prekes_Id;
 
-                        var also_viewed = _also_viewed_collection.Find(av =>
+                        try
+                        {
+                            var also_viewed = _also_viewed_collection.Find(av =>
                             (av.PrekesA_Id == id1 && av.PrekesB_Id == id2) || (av.PrekesA_Id == id2 && av.PrekesB_Id == id1)
-                        ).First();
+                            ).First();
 
-                        var update_av = Builders<Taip_Pat_Domejosi>.Update.Set(av => av.Kartojimai, also_viewed.Kartojimai + 1);
-                        _also_viewed_collection.UpdateOne(av => 
-                            av.PrekesA_Id == also_viewed.PrekesA_Id && av.PrekesB_Id == also_viewed.PrekesB_Id, update_av
-                        );
+                            var update_av = Builders<Taip_Pat_Domejosi>.Update.Set(av => av.Kartojimai, also_viewed.Kartojimai + 1);
+                            _also_viewed_collection.UpdateOne(av =>
+                                av.PrekesA_Id == also_viewed.PrekesA_Id && av.PrekesB_Id == also_viewed.PrekesB_Id, update_av
+                            );
+                        }
+                        catch { }
                     }
                 }
             }

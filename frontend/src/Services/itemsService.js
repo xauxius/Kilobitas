@@ -20,6 +20,11 @@ class ItemsClient {
         return items;
     }
 
+    async getAllItems() {
+        const items = await baseClient.get(this.path+"/all/");
+        return items;
+    }
+
     async getItem(id) {
         return await baseClient.get(this.path+"/"+id);
     }
@@ -35,6 +40,14 @@ class ItemsClient {
 
     async deleteItem(id) {
         await baseClient.delete(this.path+"/"+id);
+    }
+
+    async softDeleteItem(id) {
+        await baseClient.delete(this.path+"/softdelete/"+id);
+    }
+
+    async restoreItem(id) {
+        await baseClient.post(this.path+"/restore/"+id);
     }
 
     async getItemTypes() {

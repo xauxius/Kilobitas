@@ -29,9 +29,28 @@ namespace API.Services
             return this._collection.Find(Builders<Preke>.Filter.Empty).ToEnumerable();
         }
 
+        public IEnumerable<Preke> GetCatalogItems()
+        {
+            return this._collection.Find(item => item.Rodyti_kataloge).ToEnumerable();
+        }
+
         public void DeleteItem(Guid id)
         {
             this._collection.DeleteOne(item => item.Id == id);
+        }
+
+        public void SoftDeleteItem(Guid id)
+        {
+            var updateDef = Builders<Preke>.Update.Set(i => i.Rodyti_kataloge, false);
+
+            _collection.UpdateOne(item => item.Id == id, updateDef);
+        }
+
+        public void RestoreItem(Guid id)
+        {
+            var updateDef = Builders<Preke>.Update.Set(i => i.Rodyti_kataloge, true);
+
+            _collection.UpdateOne(item => item.Id == id, updateDef);
         }
 
         public void UpdateItem(Guid id, Preke item)
@@ -42,6 +61,7 @@ namespace API.Services
                 .Set(i => i.Kaina, item.Kaina)
                 .Set(i => i.Kiekis, item.Kiekis)
                 .Set(i => i.Tipas, item.Tipas)
+                .Set(i => i.Rodyti_kataloge, item.Rodyti_kataloge)
                 .Set(i => i.Paveikslelis, item.Paveikslelis);
 
             _collection.UpdateOne(item => item.Id == id, updateDef);

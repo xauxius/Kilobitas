@@ -24,7 +24,13 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetItems()
+        public IActionResult GetCatalogItems()
+        {
+            return Ok(_itemsService.GetCatalogItems());
+        }
+
+        [HttpGet("all")]
+        public IActionResult GetAllItems()
         {
             return Ok(_itemsService.GetItems());
         }
@@ -54,6 +60,20 @@ namespace API.Controllers
             _recommendedService.RemoveRelations(id);
             _fileService.DeleteFile(item.Paveikslelis);
             _itemsService.DeleteItem(id);
+            return Ok();
+        }
+
+        [HttpDelete("softdelete/{id}")]
+        public IActionResult SoftDeleteItem(Guid id)
+        {
+            _itemsService.SoftDeleteItem(id);
+            return Ok();
+        }
+
+        [HttpPost("restore/{id}")]
+        public IActionResult RestoreItem(Guid id)
+        {
+            _itemsService.RestoreItem(id);
             return Ok();
         }
 

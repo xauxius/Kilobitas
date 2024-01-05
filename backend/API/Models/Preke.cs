@@ -11,5 +11,6 @@ namespace API.Models
         public string Aprasymas { get; set; }
         public PrekesTipas Tipas { get; set; }
         public string Paveikslelis { get; set; }
+        public bool Rodyti_kataloge { get; set; }
     }
 }

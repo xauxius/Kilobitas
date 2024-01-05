@@ -26,7 +26,15 @@ const ItemEditView = (props) => {
         // Allow only digits and control characters
         const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Backspace', 'ArrowLeft', 'ArrowRight', 'Delete', 'Tab'];
         
-        !isInt && validKeys.push('.');
+        if (!isInt) {
+            validKeys.push('.');
+            const value = event.target.value;
+            const decimalIndex = value.indexOf('.');
+            if (decimalIndex !== -1 && value.length - decimalIndex > 2 && event.key !== 'Backspace' && event.key !== 'Delete') {
+              event.preventDefault();
+              return; // No more input after two decimal places
+            }
+          }
 
         if (!validKeys.includes(event.key) && !event.metaKey && !event.ctrlKey) {
           event.preventDefault();
@@ -42,7 +50,7 @@ const ItemEditView = (props) => {
 
     return <>
             <input type="file" onChange={props.changeImage} />
-            <img src={props.showImage} width="300" height="300"></img>
+            <img src={props.showImage} width="500"></img>
             <TextField
                 required
                 id="pavadinimas"

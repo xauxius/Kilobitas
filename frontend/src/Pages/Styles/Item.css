@@ -1,6 +1,12 @@
+/* Item.css */
 .itemContainer {
-    padding: 20px;
-  }
+  padding: 20px;
+  width: 100%; /* Fill the width */
+  min-height: 100vh; /* Fill the minimum height of the viewport */
+  box-sizing: border-box; /* Include padding in the width and height calculations */
+}
+
+/* Ensure the rest of your styles are still included */
   
   .itemContainer hr {
     margin-top: 20px;
