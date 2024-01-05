@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import cartClient from '../Services/cartService';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from "react";
+import cartClient from "../Services/cartService";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
@@ -12,36 +12,35 @@ const Cart = () => {
   }, []);
 
   useEffect(() => {
-
     calculateTotalAmount();
   }, [cartItems]);
 
   const fetchCart = async () => {
     try {
-     
-      const userId = localStorage.getItem('naudotojas');
-
+      const userId = localStorage.getItem("naudotojas");
 
       const response = await cartClient.getCart(userId);
 
-  
       setCartItems(response.data);
     } catch (error) {
-      console.error('Error fetching cart:', error);
+      console.error("Error fetching cart:", error);
     }
   };
 
   const updateCart = async (id, item) => {
     try {
       await cartClient.updateCart(id, item);
-      fetchCart(); 
+      fetchCart();
     } catch (error) {
-      console.error('Error updating cart:', error);
+      console.error("Error updating cart:", error);
     }
   };
 
   const calculateTotalAmount = () => {
-    const total = cartItems.reduce((acc, item) => acc + item.kiekis * item.kaina, 0);
+    const total = cartItems.reduce(
+      (acc, item) => acc + item.kiekis * item.kaina,
+      0
+    );
     setTotalAmount(total);
   };
 
@@ -59,7 +58,9 @@ const Cart = () => {
 
   const handleDecreaseQuantity = async (itemId) => {
     const updatedCartItems = cartItems.map((item) =>
-      item.id === itemId && item.kiekis > 1 ? { ...item, kiekis: item.kiekis - 1 } : item
+      item.id === itemId && item.kiekis > 1
+        ? { ...item, kiekis: item.kiekis - 1 }
+        : item
     );
     setCartItems(updatedCartItems);
 
@@ -74,7 +75,7 @@ const Cart = () => {
       await cartClient.deleteCart(itemId);
       fetchCart();
     } catch (error) {
-      console.error('Error removing item from cart:', error);
+      console.error("Error removing item from cart:", error);
     }
   };
 
@@ -87,30 +88,26 @@ const Cart = () => {
           kiekis: item.kiekis,
           pavadinimas: item.pavadinimas,
           kaina: item.kaina,
-          
         })),
       };
-  
+
       const insertedMokejimas = await cartClient.insertMokejimas(cartItems);
       await cartClient.deleteAllCart(cartItems[0].vartotojo_id);
       fetchCart();
-     // const form = document.getElementById('checkoutForm');
+      // const form = document.getElementById('checkoutForm');
       //form.submit()
     } catch (error) {
-      console.error('Error during checkout:', error);
+      console.error("Error during checkout:", error);
       alert("Įvyko klaida apmokant užsakymą. Bandykite dar kartą.");
     }
   };
-  
+
   return (
     <div className="container mt-4">
-      <Link to="/">
-                  Gryžti į pradžia
-            </Link>
+      <Link to="/">Gryžti į pradžia</Link>
       <h2>Prekių krepšelis</h2>
       {cartItems.length === 0 ? (
         <p>Jūsų prekių krepšelis tuščias</p>
-        
       ) : (
         <div>
           <ul className="list-group">
@@ -122,18 +119,29 @@ const Cart = () => {
                   </div>
                   <div className="col-3 d-flex align-items-center">
                     <div className="input-group">
-                      <button className="btn btn-outline-secondary" type="button" onClick={() => handleDecreaseQuantity(item.id)}>
+                      <button
+                        className="btn btn-outline-secondary"
+                        type="button"
+                        onClick={() => handleDecreaseQuantity(item.id)}
+                      >
                         -
                       </button>
                       <span className="input-group-text">{item.kiekis}</span>
-                      <button className="btn btn-outline-secondary" type="button" onClick={() => handleIncreaseQuantity(item.id)}>
+                      <button
+                        className="btn btn-outline-secondary"
+                        type="button"
+                        onClick={() => handleIncreaseQuantity(item.id)}
+                      >
                         +
                       </button>
                     </div>
                   </div>
                   <div className="col-3 d-flex align-items-center justify-content-end">
                     <div className="mr-3">{item.kaina}</div>
-                    <button className="btn btn-danger mx-3" onClick={() => handleRemoveItem(item.id)}>
+                    <button
+                      className="btn btn-danger mx-3"
+                      onClick={() => handleRemoveItem(item.id)}
+                    >
                       Ištrinti
                     </button>
                   </div>
@@ -144,11 +152,19 @@ const Cart = () => {
           <div className="mt-3">
             <strong>Bendra suma: {totalAmount.toFixed(2)} Eur</strong>
           </div>
-          <form id="checkoutForm" action="/create-checkout-session" method="POST">
-            <button type="button" className="btn btn-primary mt-3" onClick={handleCheckout}>
-          Apmokėti
-        </button>
-      </form>
+          <form
+            id="checkoutForm"
+            action="/create-checkout-session"
+            method="POST"
+          >
+            <button
+              type="button"
+              className="btn btn-primary mt-3"
+              onClick={handleCheckout}
+            >
+              Apmokėti
+            </button>
+          </form>
         </div>
       )}
     </div>
