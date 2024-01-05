@@ -1,21 +1,54 @@
 import React, { useState } from "react";
+import userClient from "../Services/userService";
+
 import "./Styles/Login.css";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleRegister = () => {
-    console.log("Register in with:", { username, password });
-  };
-  const handleContinueWithGoogle = () => {
-    console.log("Continue with Google");
+  const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await userClient.post("/auth/register", {
+        username,
+        password,
+        email,
+      });
+
+      if (response.ok) {
+        // Registration successful, handle success (e.g., redirect to login page)
+        console.log("Registration successful!");
+      } else {
+        // Registration failed, handle error
+        setError(response.message); // Assuming your API sends error messages in the response
+      }
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      <h2>Register</h2>
+      {error && <p className="error-message">{error}</p>}
       <form>
+        <label>
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <br />
         <label>
           Username:
           <input
@@ -33,12 +66,13 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
+        <br />
         <label>
           Re-enter Password:
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </label>
         <br />
@@ -46,12 +80,6 @@ const Register = () => {
           Register
         </button>
       </form>
-      <div className="google-login-container">
-        <button type="button" onClick={handleContinueWithGoogle}>
-          <img src="/Images/Google__G__Logo.svg.png" className="google-logo" />
-          Continue with Google
-        </button>
-      </div>
     </div>
   );
 };
