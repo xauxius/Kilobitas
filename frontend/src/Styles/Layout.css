@@ -1,0 +1,10 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Set the layout container height to 100% of the viewport height */
+}
+
+.content {
+    flex-grow: 1;
+    overflow-y: auto; /* Add scrollbars if content overflows vertically */
+}
