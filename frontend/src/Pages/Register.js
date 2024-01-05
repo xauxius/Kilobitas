@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import userClient from "../Services/userService";
+
 import "./Styles/Login.css";
 
 const Register = () => {
@@ -15,12 +17,10 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch("/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password, email }),
+      const response = await userClient.post("/auth/register", {
+        username,
+        password,
+        email,
       });
 
       if (response.ok) {
@@ -28,12 +28,10 @@ const Register = () => {
         console.log("Registration successful!");
       } else {
         // Registration failed, handle error
-        const errorData = await response.json();
-        setError(errorData.message); // Assuming your API sends error messages in the response
+        setError(response.message); // Assuming your API sends error messages in the response
       }
     } catch (error) {
-      // Handle network errors or other exceptions
-      setError("Registration failed. Please try again later.");
+      setError(error.message);
     }
   };
 
