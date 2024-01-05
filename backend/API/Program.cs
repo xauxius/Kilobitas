@@ -12,6 +12,7 @@ builder.Services.AddSingleton<MongoDatabase>();
 builder.Services.AddSingleton<ItemsService>();
 builder.Services.AddSingleton<RecommendedService>();
 builder.Services.AddSingleton<KrepselisService>();
+builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton(new FileService("Images"));
 builder.Services.AddCors(options =>
 {
