@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<MongoDatabase>();
 builder.Services.AddSingleton<ItemsService>();
 builder.Services.AddSingleton<RecommendedService>();
+builder.Services.AddSingleton<NaudotojasService>();
 builder.Services.AddSingleton<KrepselisService>();
 builder.Services.AddSingleton<UserService>();
 builder.Services.AddSingleton(new FileService("Images"));
