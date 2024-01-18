@@ -1,40 +1,59 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
+import naudotojasClient from "../Services/naudotojasService";
 import "./Styles/Profile.css";
 
 const Profile = () => {
-  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
+  const [naudotojas, setNaudotojas] = useState(null);
   useEffect(() => {
-    const fetchUser = async () => {
-      // Replace with your actual fetch logic
-      const response = await fetch("http://localhost:7259/api/user");
-      const data = await response.json();
-
-      setUser(data);
+    const fetchNaudotojas = async () => {
+      try {
+        const response = await naudotojasClient.getNaudotojas(
+          "f2ba770b-4225-ff4d-b8bd-d9a5a91b19f4"
+        ); // replace 'some-id' with actual id
+        setNaudotojas(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
-    fetchUser();
+    fetchNaudotojas();
   }, []);
+
   return (
     <div className="profile-container">
       <h2>Profile</h2>
-      {user ? (
+      {naudotojas ? (
         <div className="profile-info">
           <img
-            src={user.picture || "https://placekitten.com/200/200"}
+            src={naudotojas.picture || "https://placekitten.com/200/200"}
             alt="Profile"
             className="profile-picture"
           />
           <div className="user-details">
             <p>
-              <strong>Name:</strong> {user.name}
+              <strong>Username:</strong> {naudotojas.username}
             </p>
             <p>
-              <strong>Email:</strong> {user.email}
+              <strong>Name:</strong> {naudotojas.name}
             </p>
             <p>
-              <strong>Role:</strong> {user.role}
+              <strong>LastName:</strong> {naudotojas.lastname}
+            </p>
+            <p>
+              <strong>Phone:</strong> {naudotojas.phone}
+            </p>
+            <p>
+              <strong>BirthDate:</strong> {naudotojas.birthDate}
+            </p>
+            <p>
+              <strong>Email:</strong> {naudotojas.email}
+            </p>
+            <p>
+              <strong>Role:</strong> {naudotojas.userType}
             </p>
           </div>
         </div>
@@ -43,7 +62,7 @@ const Profile = () => {
       )}
       <button
         className="edit-profile-button"
-        onClick={() => console.log("Edit Profile clicked")}
+        onClick={() => navigate("/Redaguoti-Profili")}
       >
         Edit Profile
       </button>

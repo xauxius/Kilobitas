@@ -21,14 +21,22 @@ const Register = () => {
         username,
         password,
         email,
+        Role: "Naudotojas", // Default role for new users
+        Blocked: false, // Default blocked status for new users
+        Image: "https://placekitten.com/200/200", // Default image for new users
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         // Registration successful, handle success (e.g., redirect to login page)
         console.log("Registration successful!");
+        alert("Registration successful!"); // Show success message
+        setUsername(""); // Clear username field
+        setPassword(""); // Clear password field
+        setEmail(""); // Clear email field
+        setConfirmPassword(""); // Clear confirm password field
       } else {
         // Registration failed, handle error
-        setError(response.message); // Assuming your API sends error messages in the response
+        setError(response.data.message); // Assuming your API sends error messages in the response
       }
     } catch (error) {
       setError(error.message);

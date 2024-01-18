@@ -3,9 +3,6 @@ using API.Services;
 using BCrypt.Net;
 using MongoDB.Driver;
 
-
-
-
 namespace API.Services
 {
 public class UserService

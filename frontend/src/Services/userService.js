@@ -8,6 +8,9 @@ class UserClient {
   async register() {
     return await baseClient.post(`Auth/register`);
   }
+  async post(url, data) {
+    return await baseClient.post(url, data);
+  }
 }
 
 const userClient = new UserClient();

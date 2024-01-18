@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import naudotojasClient from '../../Services/naudotojasService';
+import React, { useState, useEffect } from "react";
+import naudotojasClient from "../../Services/naudotojasService";
 //import './Funkcijos.css';
-import styles from './Funkcijos.module.css';
+import styles from "./Funkcijos.module.css";
 
 const NaudotojasTable = () => {
   const [naudotojai, setNaudotojai] = useState([]);
@@ -12,7 +12,7 @@ const NaudotojasTable = () => {
         const response = await naudotojasClient.getNaudotojai();
         setNaudotojai(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -22,31 +22,33 @@ const NaudotojasTable = () => {
   const handleUpdateUserType = async (id, userType) => {
     try {
       // Fetch the existing user data
-      const existingUserData = naudotojai.find((naudotojas) => naudotojas.id === id);
-  
+      const existingUserData = naudotojai.find(
+        (naudotojas) => naudotojas.id === id
+      );
+
       // Create a new Naudotojas object with the updated userType
       const updatedNaudotojas = { ...existingUserData, userType };
-  
-      console.log('Updating userType:', userType);
-      console.log('Updated Naudotojas:', updatedNaudotojas);
-  
+
+      console.log("Updating userType:", userType);
+      console.log("Updated Naudotojas:", updatedNaudotojas);
+
       // Update the userType using the new object
       await naudotojasClient.updateNaudotojas(id, updatedNaudotojas);
-  
+
       // Fetch the updated data again
       const response = await naudotojasClient.getNaudotojai();
       setNaudotojai(response.data);
-  
+
       // Rest of the code...
     } catch (error) {
-      console.error('Error updating userType:', error);
+      console.error("Error updating userType:", error);
     }
   };
 
   return (
     <div>
       <table className={styles.table}>
-      <caption className={styles.caption}>Sistemos vartotojai</caption>
+        <caption className={styles.caption}>Sistemos vartotojai</caption>
         <thead>
           <tr>
             <th className={styles.th}>Slapyvardis</th>
@@ -70,15 +72,19 @@ const NaudotojasTable = () => {
               <td className={styles.td}>{naudotojas.birthDate}</td>
               <td className={styles.td}>{naudotojas.userType}</td>
               <td className={styles.td}>
-                <button 
-                className={styles.button}
-                  onClick={() => handleUpdateUserType(naudotojas.id, 'naudotojas')}
+                <button
+                  className={styles.button}
+                  onClick={() =>
+                    handleUpdateUserType(naudotojas.id, "naudotojas")
+                  }
                 >
                   Naudotojas
                 </button>
                 <button
-                className={styles.button}
-                  onClick={() => handleUpdateUserType(naudotojas.id, 'administratorius')}
+                  className={styles.button}
+                  onClick={() =>
+                    handleUpdateUserType(naudotojas.id, "administratorius")
+                  }
                 >
                   Administratorius
                 </button>
